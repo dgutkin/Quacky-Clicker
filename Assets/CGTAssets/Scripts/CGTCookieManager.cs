@@ -38,6 +38,7 @@ public class CGTCookieManager : MonoBehaviour {
     public Text gameQuacksText;
     public Text gameQpsText;
     public Text gameMaxBonusText;
+    public Text gameTimeText;
 
     public Slider bonusBar;
 
@@ -58,7 +59,7 @@ public class CGTCookieManager : MonoBehaviour {
 	public int clickValue = 1;
 	public ulong baseQps = 0;
 
-	private ulong quackScore = 0;
+	public ulong quackScore = 0; //turn back to private when done
 	private ulong currentBonus;
 	private ulong levelBonus = 1;
 	private ulong levelBonusMulti = 1;
@@ -397,6 +398,27 @@ public class CGTCookieManager : MonoBehaviour {
 		animator.SetBool("Tap", false);
 	}
 
+	public void DisplayGameTime()
+	{
+		ulong gameHours = 0;
+		ulong gameMinutes = 0;
+		ulong gameSecondsRemainder = 0;
+		ulong secondsInHour = 60 * 60;
+		ulong secondsInMinute = 60;
+
+		if (gameSeconds > (secondsInHour))
+		{
+			gameHours = gameSeconds / (secondsInHour);
+		}
+
+		gameMinutes = (gameSeconds - (gameHours * secondsInHour)) / secondsInMinute;
+
+		gameSecondsRemainder = gameSeconds - (gameHours * secondsInHour) - (gameMinutes * secondsInMinute);
+		
+		gameTimeText.text = "Completed in " + gameHours.ToString() + "h " + gameMinutes.ToString() + "m " + gameSecondsRemainder.ToString() + "s";
+
+	}
+
 	#endregion
 
 	#region --------------- GAME DATA ---------------
@@ -639,6 +661,7 @@ public class CGTCookieManager : MonoBehaviour {
 	public void GameOver()
 	{
 		ButtonSound();
+		DisplayGameTime();
 		ShowGameOverMenu();
 	}
 
