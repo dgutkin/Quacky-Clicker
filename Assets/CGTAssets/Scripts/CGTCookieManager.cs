@@ -437,7 +437,7 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public ulong CalculatePowerClickPrice(int itemLevel)
 	{
-		ulong itemPrice = (ulong) Mathf.Pow(10, 1 + (itemLevel / 2.0f));
+		ulong itemPrice = (ulong) Mathf.Pow(10, 1 + (itemLevel / 2.5f));
 		
 		return RoundLargeNumber(itemPrice);
 	}
