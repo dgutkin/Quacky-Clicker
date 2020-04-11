@@ -71,26 +71,26 @@ public class CGTCookieManager : MonoBehaviour {
 	private ulong levelQpsShown = 0;
 
 	[Header("Items")]
-	public Item powerClick = new Item(0, new int[30], 1, "power click");
-	public Item toothbrush = new Item(0, new int[100], 1, "toothbrush");
-	public Item toothpaste = new Item (0, new int[100], 2, "toothpaste");
-	public Item soap = new Item(0, new int[100], 5, "soap");
-	public Item sponge = new Item (0, new int[100], 10, "sponge");
-	public Item deodorant = new Item (0, new int[100], 20, "deodorant");
-	public Item toiletPaper = new Item (0, new int[100], 50, "toilet paper");
-	public Item hairbrush = new Item (0, new int[100], 100, "hair brush");
-	public Item toiletBrush = new Item (0, new int[100], 500, "toilet brush");
-	public Item plunger = new Item (0, new int[100], 1000, "plunger");
-	public Item scale = new Item (0, new int[100], 5000, "scale");
-	public Item ovalMirror = new Item (0, new int[100], 10000, "oval mirror");
-	public Item towel = new Item (0, new int[100], 50000, "towel");
-	public Item towelRack = new Item (0, new int[100], 100000, "towel rack");
-	public Item hairDryer = new Item (0, new int[100], 500000, "hair dryer");
-	public Item sink = new Item (0, new int[100], 10000000, "sink");
-	public Item toilet = new Item (0, new int[100], 5000000, "toilet");
-	public Item shower = new Item (0, new int[100], 10000000, "shower");
-	public Item bathtub = new Item (0, new int[100], 50000000, "bathtub");
-	public Item washingMachine = new Item (0, new int[100], 1000000000, "washing machine"); //Actual Qps: 100000000
+	public Item powerClick = new Item(0, 30, 1, 0, "PowerClick");
+	public Item toothbrush = new Item(0, 100, 1, 1, "Toothbrush");
+	public Item toothpaste = new Item (0, 100, 1, 2, "Toothpaste");
+	public Item soap = new Item(0, 100, 1, 5, "Soap");
+	public Item sponge = new Item (0, 100, 1, 10, "Sponge");
+	public Item deodorant = new Item (0, 100, 1, 20, "Deodorant");
+	public Item toiletPaper = new Item (0, 100, 1, 50, "ToiletPaper");
+	public Item hairbrush = new Item (0, 100, 1, 100, "HairBrush");
+	public Item toiletBrush = new Item (0, 100, 1, 500, "ToiletBrush");
+	public Item plunger = new Item (0, 100, 1, 1000, "Plunger");
+	public Item scale = new Item (0, 100, 1, 5000, "Scale");
+	public Item ovalMirror = new Item (0, 100, 1, 10000, "OvalMirror");
+	public Item towel = new Item (0, 100, 1, 50000, "Towel");
+	public Item towelRack = new Item (0, 100, 1, 100000, "TowelRack");
+	public Item hairDryer = new Item (0, 100, 1, 500000, "HairDryer");
+	public Item sink = new Item (0, 100, 1, 10000000, "Sink");
+	public Item toilet = new Item (0, 100, 1, 5000000, "Toilet");
+	public Item shower = new Item (0, 100, 1, 10000000, "Shower");
+	public Item bathtub = new Item (0, 100, 1, 50000000, "Bathtub");
+	public Item washingMachine = new Item (0, 100, 1, 100000000, "WashingMachine"); 
 
 	[Header("Item Level Texts")]
 	public Text powerClickLevelText;
@@ -113,6 +113,27 @@ public class CGTCookieManager : MonoBehaviour {
 	public Text showerLevelText;
 	public Text bathtubLevelText;
 	public Text washingMachineLevelText;
+
+	public Text powerClickPriceText;
+	public Text toothbrushPriceText;
+	public Text toothpastePriceText;
+	public Text soapPriceText;
+	public Text spongePriceText;
+	public Text deodorantPriceText;
+	public Text toiletPaperPriceText;
+	public Text hairbrushPriceText;
+	public Text toiletBrushPriceText;
+	public Text plungerPriceText;
+	public Text scalePriceText;
+	public Text ovalMirrorPriceText;
+	public Text towelPriceText;
+	public Text towelRackPriceText;
+	public Text hairDryerPriceText;
+	public Text sinkPriceText;
+	public Text toiletPriceText;
+	public Text showerPriceText;
+	public Text bathtubPriceText;
+	public Text washingMachinePriceText;
 	// could have a separate class called ItemManager
 	// the class initializes all the level texts and contains all the upgrade methods
 	// this class invokes the ItemManager to make updates to the Items however handling quacks and Qps updates here
@@ -326,21 +347,9 @@ public class CGTCookieManager : MonoBehaviour {
 		SetMaxBonusText();
     }
 
-	public void SetMaxBonusText() {
-
-		int levelBonusSize = (int) Mathf.Floor(Mathf.Log10(levelBonus));
-		if (levelBonusSize < 3) {
-			gameMaxBonusText.text = levelBonus.ToString ("F1");
-		} else if (levelBonusSize < 6) {
-			gameMaxBonusText.text = (levelBonus / 1000f).ToString ("F1") + "k";
-		} else if (levelBonusSize < 9) {
-			gameMaxBonusText.text = (levelBonus / 1000000f).ToString ("F1") + "mn";
-		} else if (levelBonusSize < 12) {
-			gameMaxBonusText.text = (levelBonus / 1000000000f).ToString ("F1") + "bn";
-		} else if (levelBonusSize < 15) {
-			gameMaxBonusText.text = (levelBonus / 1000000000000f).ToString ("F1") + "tn";
-		}
-
+	public void SetMaxBonusText() 
+	{
+		gameMaxBonusText.text = FormatLargeNumber(RoundLargeNumber(levelBonus));
 	}
 
     public void CreateTextScore(int scoreValue)
@@ -419,6 +428,59 @@ public class CGTCookieManager : MonoBehaviour {
 
 	}
 
+	public ulong CalculateItemPrice(int itemQps)
+	{
+		ulong itemPrice =  (baseQps + (ulong) clickValue  + (ulong) itemQps) * 60;
+	
+		return RoundLargeNumber(itemPrice);
+	}
+
+	public ulong CalculatePowerClickPrice(int itemLevel)
+	{
+		ulong itemPrice = (ulong) Mathf.Pow(10, 1 + (itemLevel / 2.0f));
+		
+		return RoundLargeNumber(itemPrice);
+	}
+
+	public ulong RoundLargeNumber(ulong Number)
+	{
+		int numberSize = (int) Mathf.Floor(Mathf.Log10(Number));	
+
+		if (numberSize < 3) {
+			Number = Number / 1 * 1;
+		} else if (numberSize < 6) {
+			Number = (Number / 1000) * 1000;
+		} else if (numberSize < 9) {
+			Number = (Number / 1000000) * 1000000;
+		} else if (numberSize < 12) {
+			Number = (Number / 1000000000) * 1000000000;
+		} else if (numberSize < 15) {
+			Number = (Number / 1000000000000) * 1000000000000;
+		}
+
+		return Number;
+	}
+
+	public string FormatLargeNumber(ulong Number)
+	{
+		int numberSize = (int) Mathf.Floor(Mathf.Log10(Number));
+		string formattedNumber = "";
+
+		if (numberSize < 3) {
+			formattedNumber = Number.ToString ("F0");
+		} else if (numberSize < 6) {
+			formattedNumber = (Number / 1000).ToString ("F0") + "k";
+		} else if (numberSize < 9) {
+			formattedNumber = (Number / 1000000).ToString ("F0") + "mn";
+		} else if (numberSize < 12) {
+			formattedNumber = (Number / 1000000000).ToString ("F0") + "bn";
+		} else if (numberSize < 15) {
+			formattedNumber = (Number / 1000000000000).ToString ("F0") + "tn";
+		}
+
+		return formattedNumber;
+	}
+
 	#endregion
 
 	#region --------------- GAME DATA ---------------
@@ -427,7 +489,6 @@ public class CGTCookieManager : MonoBehaviour {
     {
 		#if UNITY_5_3_OR_NEWER
 	        
-			// also include in prefs baseQps
 			PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
 			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "0"));
 			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", "10"));
@@ -495,26 +556,26 @@ public class CGTCookieManager : MonoBehaviour {
 		SetMaxBonusText ();
 		bonusBar.value = (float) currentBonus;
 
-		powerClick.QuackPrices = powerClick.GenerateItemPrices (1, 1, 30); //actual base is 10
-		toothbrush.QuackPrices = toothbrush.GenerateItemPrices (1, 10, 100); //actual base is 10
-		toothpaste.QuackPrices = toothpaste.GenerateItemPrices (1, 9, 100); // actual base is 50
-		soap.QuackPrices = soap.GenerateItemPrices(1, 8, 100);
-		sponge.QuackPrices = sponge.GenerateItemPrices (1, 7, 100);
-		deodorant.QuackPrices = deodorant.GenerateItemPrices (1, 6, 100);
-		toiletPaper.QuackPrices = toiletPaper.GenerateItemPrices (1, 5, 100);
-		hairbrush.QuackPrices = hairbrush.GenerateItemPrices (1, 4, 100);
-		toiletBrush.QuackPrices = toiletBrush.GenerateItemPrices (1, 3, 100);
-		plunger.QuackPrices = plunger.GenerateItemPrices (1, 2, 100);
-		scale.QuackPrices = scale.GenerateItemPrices (1, 1, 100);
-		ovalMirror.QuackPrices = ovalMirror.GenerateItemPrices (1, 1, 100);
-		towel.QuackPrices = towel.GenerateItemPrices (1, 1, 100);
-		towelRack.QuackPrices = towelRack.GenerateItemPrices (1, 1, 100);
-		hairDryer.QuackPrices = hairDryer.GenerateItemPrices (1, 1, 100);
-		sink.QuackPrices = sink.GenerateItemPrices (1, 1, 100);
-		toilet.QuackPrices = toilet.GenerateItemPrices (1, 1, 100);
-		shower.QuackPrices = shower.GenerateItemPrices (1, 1, 100);
-		bathtub.QuackPrices = bathtub.GenerateItemPrices (1, 1, 100);
-		washingMachine.QuackPrices = washingMachine.GenerateItemPrices (1, 1, 100);
+		powerClick.Price = CalculatePowerClickPrice(powerClick.Level);
+		toothbrush.Price = CalculateItemPrice(toothbrush.Qps);
+		toothpaste.Price = CalculateItemPrice(toothpaste.Qps);
+		soap.Price = CalculateItemPrice(soap.Qps);
+		sponge.Price = CalculateItemPrice(sponge.Qps);
+		deodorant.Price = CalculateItemPrice(deodorant.Qps);
+		toiletPaper.Price = CalculateItemPrice(toiletPaper.Qps);
+		hairbrush.Price = CalculateItemPrice(hairbrush.Qps);
+		toiletBrush.Price = CalculateItemPrice(toiletBrush.Qps);
+		plunger.Price = CalculateItemPrice(plunger.Qps);
+		scale.Price = CalculateItemPrice(scale.Qps);
+		ovalMirror.Price = CalculateItemPrice(ovalMirror.Qps);
+		towel.Price = CalculateItemPrice(towel.Qps);
+		towelRack.Price = CalculateItemPrice(towelRack.Qps);
+		hairDryer.Price = CalculateItemPrice(hairDryer.Qps);
+		sink.Price = CalculateItemPrice(sink.Qps);
+		toilet.Price = CalculateItemPrice(toilet.Qps);
+		shower.Price = CalculateItemPrice(shower.Qps);
+		bathtub.Price = CalculateItemPrice(bathtub.Qps);
+		washingMachine.Price = CalculateItemPrice(washingMachine.Qps);
 
 		powerClickLevelText.text = UpdateItemLevel (powerClick.Level);
 		toothbrushLevelText.text = UpdateItemLevel (toothbrush.Level);
@@ -536,6 +597,27 @@ public class CGTCookieManager : MonoBehaviour {
 		showerLevelText.text = UpdateItemLevel (shower.Level);
 		bathtubLevelText.text = UpdateItemLevel (bathtub.Level);
 		washingMachineLevelText.text = UpdateItemLevel (washingMachine.Level);
+
+		powerClickPriceText.text = "Cost: " + UpdateItemPrice(powerClick.Level, powerClick.LevelCount, powerClick.Qps);
+		toothbrushPriceText.text = UpdateItemPrice(toothbrush.Level, toothbrush.LevelCount, toothbrush.Qps);
+		toothpastePriceText.text = UpdateItemPrice(toothpaste.Level, toothpaste.LevelCount, toothpaste.Qps);
+		soapPriceText.text = UpdateItemPrice(soap.Level, soap.LevelCount, soap.Qps);
+		spongePriceText.text = UpdateItemPrice(sponge.Level, sponge.LevelCount, sponge.Qps);
+		deodorantPriceText.text = UpdateItemPrice(deodorant.Level, deodorant.LevelCount, deodorant.Qps);
+		toiletPaperPriceText.text = UpdateItemPrice(toiletPaper.Level, toiletPaper.LevelCount, toiletPaper.Qps);
+		hairbrushPriceText.text = UpdateItemPrice(hairbrush.Level, hairbrush.LevelCount, hairbrush.Qps);
+		toiletBrushPriceText.text = UpdateItemPrice(toiletBrush.Level, toiletBrush.LevelCount, toiletBrush.Qps);
+		plungerPriceText.text = UpdateItemPrice(plunger.Level, plunger.LevelCount, plunger.Qps);
+		scalePriceText.text = UpdateItemPrice(scale.Level, scale.LevelCount, scale.Qps);
+		ovalMirrorPriceText.text = UpdateItemPrice(ovalMirror.Level, ovalMirror.LevelCount, ovalMirror.Qps);
+		towelPriceText.text = UpdateItemPrice(towel.Level, towel.LevelCount, towel.Qps);
+		towelRackPriceText.text = UpdateItemPrice(towelRack.Level, towelRack.LevelCount, towelRack.Qps);
+		hairDryerPriceText.text = UpdateItemPrice(hairDryer.Level, hairDryer.LevelCount, hairDryer.Qps);
+		sinkPriceText.text = UpdateItemPrice(sink.Level, sink.LevelCount, sink.Qps);
+		toiletPriceText.text = UpdateItemPrice(toilet.Level, toilet.LevelCount, toilet.Qps);
+		showerPriceText.text = UpdateItemPrice(shower.Level, shower.LevelCount, shower.Qps);
+		bathtubPriceText.text = UpdateItemPrice(bathtub.Level, bathtub.LevelCount, bathtub.Qps);
+		washingMachinePriceText.text = UpdateItemPrice(washingMachine.Level, washingMachine.LevelCount, washingMachine.Qps);
 
     }
 
@@ -681,29 +763,9 @@ public class CGTCookieManager : MonoBehaviour {
 
 	#region ----------------- ITEMS --------------------
 
-	public void PowerUp()
-	{
+	public bool BuyQualify(int itemLevel, int itemLevelCount, ulong itemPrice){
 
-		if (BuyQualify (powerClick.Level, powerClick.QuackPrices)) {
-
-			BuyItem (powerClick.QuackPrices, powerClick.Level);
-			powerClick.Level++;
-			clickValue *= 2; // double the click value
-
-			Text powerClickLevelText = GameObject.Find ("PowerClickLevelText").GetComponent<Text> ();
-			powerClickLevelText.text = UpdateItemLevel (powerClick.Level);
-			Text powerClickPriceText = GameObject.Find ("PowerClickPriceText").GetComponent<Text> ();
-			powerClickPriceText.text = "Cost: " + UpdateItemPrice (powerClick.Level, powerClick.QuackPrices);
-
-			UpdateGameData ();
-			SaveGameData ();
-		}
-			
-	}
-
-	public bool BuyQualify(int itemLevel, int[] itemQuackPrices){
-
-		if (itemLevel < itemQuackPrices.Length && quackScore >= (ulong) itemQuackPrices [itemLevel]) {
+		if ((itemLevel < itemLevelCount) && (quackScore >= itemPrice)) {
 			
 			return true;
 
@@ -716,10 +778,10 @@ public class CGTCookieManager : MonoBehaviour {
 
 	}
 
-	public void BuyItem(int[] itemQuackPrices, int itemLevel){
+	public void BuyItem(ulong itemPrice, int itemLevel){
 
 		PlaySound (gameBonusClickSound [Random.Range (0, gameBonusClickSound.Length)]);
-		quackScore = quackScore - (ulong) itemQuackPrices [itemLevel];
+		quackScore = quackScore - itemPrice;
 
 	}
 
@@ -735,33 +797,63 @@ public class CGTCookieManager : MonoBehaviour {
 
 	}
 
-	public string UpdateItemPrice(int itemLevel, int[] itemQuackPrices){
+	public string UpdateItemPrice(int itemLevel, int itemLevelCount, int itemQps){
 
-		if (itemLevel == itemQuackPrices.Length) {
+		if (itemLevel == itemLevelCount) {
 
 			return "Maxed";
 
 		} else {
 
-			return itemQuackPrices [itemLevel].ToString () + " quacks";
+			ulong itemPrice = 0;
 
+			if (itemQps == 0)
+			{
+				itemPrice = CalculatePowerClickPrice(itemLevel);
+			} else {
+				itemPrice = CalculateItemPrice(itemQps);	
+			}
+
+			return FormatLargeNumber(itemPrice) + " quacks";
 		}
 
+	}
+
+	public void PowerUp()
+	{
+
+		if (BuyQualify (powerClick.Level, powerClick.LevelCount, powerClick.Price)) {
+
+			BuyItem (powerClick.Price, powerClick.Level);
+			powerClick.Level++;
+			powerClick.Price = CalculatePowerClickPrice(powerClick.Level);
+			clickValue *= 2; // double the click value
+
+			Text powerClickLevelText = GameObject.Find ("PowerClickLevelText").GetComponent<Text> ();
+			powerClickLevelText.text = UpdateItemLevel (powerClick.Level);
+			Text powerClickPriceText = GameObject.Find ("PowerClickPriceText").GetComponent<Text> ();
+			powerClickPriceText.text = "Cost: " + UpdateItemPrice (powerClick.Level, powerClick.LevelCount, powerClick.Qps);
+
+			UpdateGameData ();
+			SaveGameData ();
+		}
+			
 	}
 
 	public void ToothbrushUpgrade()
 	{
 
-		if (BuyQualify (toothbrush.Level, toothbrush.QuackPrices)) {
+		if (BuyQualify (toothbrush.Level, toothbrush.LevelCount, toothbrush.Price)) {
 
-			BuyItem (toothbrush.QuackPrices, toothbrush.Level);
+			BuyItem (toothbrush.Price, toothbrush.Level);
 			toothbrush.Level++;
 			UpdateQps(toothbrush.Qps);
+			toothbrush.Price = CalculateItemPrice(toothbrush.Qps);
 
 			Text toothbrushLevelText = GameObject.Find ("ToothbrushLevelText").GetComponent<Text> ();
 			toothbrushLevelText.text = UpdateItemLevel (toothbrush.Level);
 			Text toothbrushPriceText = GameObject.Find ("ToothbrushPriceText").GetComponent<Text> ();
-			toothbrushPriceText.text = UpdateItemPrice (toothbrush.Level, toothbrush.QuackPrices);
+			toothbrushPriceText.text = UpdateItemPrice (toothbrush.Level, toothbrush.LevelCount, toothbrush.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -770,16 +862,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void ToothpasteUpgrade()
 	{
-		if (BuyQualify (toothpaste.Level, toothpaste.QuackPrices)) {
+		if (BuyQualify (toothpaste.Level, toothpaste.LevelCount, toothpaste.Price)) {
 
-			BuyItem (toothpaste.QuackPrices, toothpaste.Level);
+			BuyItem (toothpaste.Price, toothpaste.Level);
 			toothpaste.Level++;
 			UpdateQps (toothpaste.Qps);
+			toothpaste.Price = CalculateItemPrice(toothpaste.Qps);
 
 			Text toothpasteLevelText = GameObject.Find ("ToothpasteLevelText").GetComponent<Text> ();
 			toothpasteLevelText.text = UpdateItemLevel (toothpaste.Level);
 			Text toothpastePriceText = GameObject.Find ("ToothpastePriceText").GetComponent<Text> ();
-			toothpastePriceText.text = UpdateItemPrice (toothpaste.Level, toothpaste.QuackPrices);
+			toothpastePriceText.text = UpdateItemPrice (toothpaste.Level, toothpaste.LevelCount, toothpaste.Qps);
 
 			UpdateGameData();
 			SaveGameData ();
@@ -789,16 +882,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void SoapUpgrade()
 	{
-		if (BuyQualify (soap.Level, soap.QuackPrices)) {
+		if (BuyQualify (soap.Level, soap.LevelCount, soap.Price)) {
 
-			BuyItem (soap.QuackPrices, soap.Level);
+			BuyItem (soap.Price, soap.Level);
 			soap.Level++;
 			UpdateQps (soap.Qps);
+			soap.Price = CalculateItemPrice(soap.Qps);
 
 			Text soapLevelText = GameObject.Find ("SoapLevelText").GetComponent<Text> ();
 			soapLevelText.text = UpdateItemLevel (soap.Level);
 			Text soapPriceText = GameObject.Find ("SoapPriceText").GetComponent<Text> ();
-			soapPriceText.text = UpdateItemPrice (soap.Level, soap.QuackPrices);
+			soapPriceText.text = UpdateItemPrice (soap.Level, soap.LevelCount, soap.Qps);
 
 			UpdateGameData();
 			SaveGameData ();
@@ -808,16 +902,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void SpongeUpgrade()
 	{
-		if (BuyQualify (sponge.Level, sponge.QuackPrices)) {
+		if (BuyQualify (sponge.Level, sponge.LevelCount, sponge.Price)) {
 
-			BuyItem (sponge.QuackPrices, sponge.Level);
+			BuyItem (sponge.Price, sponge.Level);
 			sponge.Level++;
 			UpdateQps (sponge.Qps);
+			sponge.Price = CalculateItemPrice(sponge.Qps);
 
 			Text spongeLevelText = GameObject.Find ("SpongeLevelText").GetComponent<Text> ();
 			spongeLevelText.text = UpdateItemLevel (sponge.Level);
 			Text spongePriceText = GameObject.Find ("SpongePriceText").GetComponent<Text> ();
-			spongePriceText.text = UpdateItemPrice (sponge.Level, sponge.QuackPrices);
+			spongePriceText.text = UpdateItemPrice (sponge.Level, sponge.LevelCount, sponge.Qps);
 
 			UpdateGameData();
 			SaveGameData ();
@@ -827,16 +922,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void DeodorantUpgrade()
 	{
-		if (BuyQualify (deodorant.Level, deodorant.QuackPrices)) {
+		if (BuyQualify (deodorant.Level, deodorant.LevelCount, deodorant.Price)) {
 
-			BuyItem (deodorant.QuackPrices, deodorant.Level);
+			BuyItem (deodorant.Price, deodorant.Level);
 			deodorant.Level++;
 			UpdateQps (deodorant.Qps);
+			deodorant.Price = CalculateItemPrice(deodorant.Qps);
 
 			Text deodorantLevelText = GameObject.Find ("DeodorantLevelText").GetComponent<Text> ();
 			deodorantLevelText.text = UpdateItemLevel (deodorant.Level);
 			Text deodorantPriceText = GameObject.Find ("DeodorantPriceText").GetComponent<Text> ();
-			deodorantPriceText.text = UpdateItemPrice (deodorant.Level, deodorant.QuackPrices);
+			deodorantPriceText.text = UpdateItemPrice (deodorant.Level, deodorant.LevelCount, deodorant.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -846,16 +942,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void ToiletPaperUpgrade()
 	{
-		if (BuyQualify (toiletPaper.Level, toiletPaper.QuackPrices)) {
+		if (BuyQualify (toiletPaper.Level, toiletPaper.LevelCount, toiletPaper.Price)) {
 
-			BuyItem (toiletPaper.QuackPrices, toiletPaper.Level);
+			BuyItem (toiletPaper.Price, toiletPaper.Level);
 			toiletPaper.Level++;
 			UpdateQps (toiletPaper.Qps);
+			toiletPaper.Price = CalculateItemPrice(toiletPaper.Qps);
 
 			Text toiletPaperLevelText = GameObject.Find ("ToiletPaperLevelText").GetComponent<Text> ();
 			toiletPaperLevelText.text = UpdateItemLevel (toiletPaper.Level);
 			Text toiletPaperPriceText = GameObject.Find ("ToiletPaperPriceText").GetComponent<Text> ();
-			toiletPaperPriceText.text = UpdateItemPrice (toiletPaper.Level, toiletPaper.QuackPrices);
+			toiletPaperPriceText.text = UpdateItemPrice (toiletPaper.Level, toiletPaper.LevelCount, toiletPaper.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -865,16 +962,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void HairbrushUpgrade()
 	{
-		if (BuyQualify (hairbrush.Level, hairbrush.QuackPrices)) {
+		if (BuyQualify (hairbrush.Level, hairbrush.LevelCount, hairbrush.Price)) {
 
-			BuyItem (hairbrush.QuackPrices, hairbrush.Level);
+			BuyItem (hairbrush.Price, hairbrush.Level);
 			hairbrush.Level++;
 			UpdateQps (hairbrush.Qps);
+			hairbrush.Price = CalculateItemPrice(hairbrush.Qps);
 
 			Text hairbrushLevelText = GameObject.Find ("HairbrushLevelText").GetComponent<Text> ();
 			hairbrushLevelText.text = UpdateItemLevel (hairbrush.Level);
 			Text hairbrushPriceText = GameObject.Find ("HairbrushPriceText").GetComponent<Text> ();
-			hairbrushPriceText.text = UpdateItemPrice (hairbrush.Level, hairbrush.QuackPrices);
+			hairbrushPriceText.text = UpdateItemPrice (hairbrush.Level, hairbrush.LevelCount, hairbrush.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -884,16 +982,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void ToiletBrushUpgrade()
 	{
-		if (BuyQualify (toiletBrush.Level, toiletBrush.QuackPrices)) {
+		if (BuyQualify (toiletBrush.Level, toiletBrush.LevelCount, toiletBrush.Price)) {
 
-			BuyItem (toiletBrush.QuackPrices, toiletBrush.Level);
+			BuyItem (toiletBrush.Price, toiletBrush.Level);
 			toiletBrush.Level++;
 			UpdateQps (toiletBrush.Qps);
+			toiletBrush.Price = CalculateItemPrice(toiletBrush.Qps);
 
 			Text toiletBrushLevelText = GameObject.Find ("ToiletBrushLevelText").GetComponent<Text> ();
 			toiletBrushLevelText.text = UpdateItemLevel (toiletBrush.Level);
 			Text toiletBrushPriceText = GameObject.Find ("ToiletBrushPriceText").GetComponent<Text> ();
-			toiletBrushPriceText.text = UpdateItemPrice (toiletBrush.Level, toiletBrush.QuackPrices);
+			toiletBrushPriceText.text = UpdateItemPrice (toiletBrush.Level, toiletBrush.LevelCount, toiletBrush.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -903,16 +1002,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void PlungerUpgrade()
 	{
-		if (BuyQualify (plunger.Level, plunger.QuackPrices)) {
+		if (BuyQualify (plunger.Level, plunger.LevelCount, plunger.Price)) {
 
-			BuyItem (plunger.QuackPrices, plunger.Level);
+			BuyItem (plunger.Price, plunger.Level);
 			plunger.Level++;
 			UpdateQps (plunger.Qps);
+			plunger.Price = CalculateItemPrice(plunger.Qps);
 
 			Text plungerLevelText = GameObject.Find ("PlungerLevelText").GetComponent<Text> ();
 			plungerLevelText.text = UpdateItemLevel (plunger.Level);
 			Text plungerPriceText = GameObject.Find ("PlungerPriceText").GetComponent<Text> ();
-			plungerPriceText.text = UpdateItemPrice (plunger.Level, plunger.QuackPrices);
+			plungerPriceText.text = UpdateItemPrice (plunger.Level, plunger.LevelCount, plunger.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -922,16 +1022,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void ScaleUpgrade()
 	{
-		if (BuyQualify (scale.Level, scale.QuackPrices)) {
+		if (BuyQualify (scale.Level, scale.LevelCount, scale.Price)) {
 
-			BuyItem (scale.QuackPrices, scale.Level);
+			BuyItem (scale.Price, scale.Level);
 			scale.Level++;
 			UpdateQps (scale.Qps);
+			scale.Price = CalculateItemPrice(scale.Qps);
 
 			Text scaleLevelText = GameObject.Find ("ScaleLevelText").GetComponent<Text> ();
 			scaleLevelText.text = UpdateItemLevel (scale.Level);
 			Text scalePriceText = GameObject.Find ("ScalePriceText").GetComponent<Text> ();
-			scalePriceText.text = UpdateItemPrice (scale.Level, scale.QuackPrices);
+			scalePriceText.text = UpdateItemPrice (scale.Level, scale.LevelCount, scale.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -941,16 +1042,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void OvalMirrorUpgrade()
 	{
-		if (BuyQualify (ovalMirror.Level, ovalMirror.QuackPrices)) {
+		if (BuyQualify (ovalMirror.Level, ovalMirror.LevelCount, ovalMirror.Price)) {
 
-			BuyItem (ovalMirror.QuackPrices, ovalMirror.Level);
+			BuyItem (ovalMirror.Price, ovalMirror.Level);
 			ovalMirror.Level++;
 			UpdateQps (ovalMirror.Qps);
+			ovalMirror.Price = CalculateItemPrice(ovalMirror.Qps);
 
 			Text ovalMirrorLevelText = GameObject.Find ("OvalMirrorLevelText").GetComponent<Text> ();
 			ovalMirrorLevelText.text = UpdateItemLevel (ovalMirror.Level);
 			Text ovalMirrorPriceText = GameObject.Find ("OvalMirrorPriceText").GetComponent<Text> ();
-			ovalMirrorPriceText.text = UpdateItemPrice (ovalMirror.Level, ovalMirror.QuackPrices);
+			ovalMirrorPriceText.text = UpdateItemPrice (ovalMirror.Level, ovalMirror.LevelCount, ovalMirror.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -960,16 +1062,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void TowelUpgrade()
 	{
-		if (BuyQualify (towel.Level, towel.QuackPrices)) {
+		if (BuyQualify (towel.Level, towel.LevelCount, towel.Price)) {
 
-			BuyItem (towel.QuackPrices, towel.Level);
+			BuyItem (towel.Price, towel.Level);
 			towel.Level++;
 			UpdateQps (towel.Qps);
+			towel.Price = CalculateItemPrice(towel.Qps);
 
 			Text towelLevelText = GameObject.Find ("TowelLevelText").GetComponent<Text> ();
 			towelLevelText.text = UpdateItemLevel (towel.Level);
 			Text towelPriceText = GameObject.Find ("TowelPriceText").GetComponent<Text> ();
-			towelPriceText.text = UpdateItemPrice (towel.Level, towel.QuackPrices);
+			towelPriceText.text = UpdateItemPrice (towel.Level, towel.LevelCount, towel.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -979,16 +1082,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void TowelRackUpgrade()
 	{
-		if (BuyQualify (towelRack.Level, towelRack.QuackPrices)) {
+		if (BuyQualify (towelRack.Level, towelRack.LevelCount, towelRack.Price)) {
 
-			BuyItem (towelRack.QuackPrices, towelRack.Level);
+			BuyItem (towelRack.Price, towelRack.Level);
 			towelRack.Level++;
 			UpdateQps (towelRack.Qps);
+			towelRack.Price = CalculateItemPrice(towelRack.Qps);
 
 			Text towelRackLevelText = GameObject.Find ("TowelRackLevelText").GetComponent<Text> ();
 			towelRackLevelText.text = UpdateItemLevel (towelRack.Level);
 			Text towelRackPriceText = GameObject.Find ("TowelRackPriceText").GetComponent<Text> ();
-			towelRackPriceText.text = UpdateItemPrice (towelRack.Level, towelRack.QuackPrices);
+			towelRackPriceText.text = UpdateItemPrice (towelRack.Level, towelRack.LevelCount, towelRack.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -998,16 +1102,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void HairDryerUpgrade()
 	{
-		if (BuyQualify (hairDryer.Level, hairDryer.QuackPrices)) {
+		if (BuyQualify (hairDryer.Level, hairDryer.LevelCount, hairDryer.Price)) {
 
-			BuyItem (hairDryer.QuackPrices, hairDryer.Level);
+			BuyItem (hairDryer.Price, hairDryer.Level);
 			hairDryer.Level++;
 			UpdateQps (hairDryer.Qps);
+			hairDryer.Price = CalculateItemPrice(hairDryer.Qps);
 
 			Text hairDryerLevelText = GameObject.Find ("HairDryerLevelText").GetComponent<Text> ();
 			hairDryerLevelText.text = UpdateItemLevel (hairDryer.Level);
 			Text hairDryerPriceText = GameObject.Find ("HairDryerPriceText").GetComponent<Text> ();
-			hairDryerPriceText.text = UpdateItemPrice (hairDryer.Level, hairDryer.QuackPrices);
+			hairDryerPriceText.text = UpdateItemPrice (hairDryer.Level, hairDryer.LevelCount, hairDryer.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -1017,16 +1122,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void SinkUpgrade()
 	{
-		if (BuyQualify (sink.Level, sink.QuackPrices)) {
+		if (BuyQualify (sink.Level, sink.LevelCount, sink.Price)) {
 
-			BuyItem (sink.QuackPrices, sink.Level);
+			BuyItem (sink.Price, sink.Level);
 			sink.Level++;
 			UpdateQps (sink.Qps);
+			sink.Price = CalculateItemPrice(sink.Qps);
 
 			Text sinkLevelText = GameObject.Find ("SinkLevelText").GetComponent<Text> ();
 			sinkLevelText.text = UpdateItemLevel (sink.Level);
 			Text sinkPriceText = GameObject.Find ("SinkPriceText").GetComponent<Text> ();
-			sinkPriceText.text = UpdateItemPrice (sink.Level, sink.QuackPrices);
+			sinkPriceText.text = UpdateItemPrice (sink.Level, sink.LevelCount, sink.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -1036,16 +1142,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void ToiletUpgrade()
 	{
-		if (BuyQualify (toilet.Level, toilet.QuackPrices)) {
+		if (BuyQualify (toilet.Level, toilet.LevelCount, toilet.Price)) {
 
-			BuyItem (toilet.QuackPrices, toilet.Level);
+			BuyItem (toilet.Price, toilet.Level);
 			toilet.Level++;
 			UpdateQps (toilet.Qps);
+			toilet.Price = CalculateItemPrice(toilet.Qps);
 
 			Text toiletLevelText = GameObject.Find ("ToiletLevelText").GetComponent<Text> ();
 			toiletLevelText.text = UpdateItemLevel (toilet.Level);
 			Text toiletPriceText = GameObject.Find ("ToiletPriceText").GetComponent<Text> ();
-			toiletPriceText.text = UpdateItemPrice (toilet.Level, toilet.QuackPrices);
+			toiletPriceText.text = UpdateItemPrice (toilet.Level, toilet.LevelCount, toilet.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -1055,16 +1162,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void ShowerUpgrade()
 	{
-		if (BuyQualify (shower.Level, shower.QuackPrices)) {
+		if (BuyQualify (shower.Level, shower.LevelCount, shower.Price)) {
 
-			BuyItem (shower.QuackPrices, shower.Level);
+			BuyItem (shower.Price, shower.Level);
 			shower.Level++;
 			UpdateQps (shower.Qps);
+			shower.Price = CalculateItemPrice(shower.Qps);
 
 			Text showerLevelText = GameObject.Find ("ShowerLevelText").GetComponent<Text> ();
 			showerLevelText.text = UpdateItemLevel (shower.Level);
 			Text showerPriceText = GameObject.Find ("ShowerPriceText").GetComponent<Text> ();
-			showerPriceText.text = UpdateItemPrice (shower.Level, shower.QuackPrices);
+			showerPriceText.text = UpdateItemPrice (shower.Level, shower.LevelCount, shower.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -1074,16 +1182,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void BathtubUpgrade()
 	{
-		if (BuyQualify (bathtub.Level, bathtub.QuackPrices)) {
+		if (BuyQualify (bathtub.Level, bathtub.LevelCount, bathtub.Price)) {
 
-			BuyItem (bathtub.QuackPrices, bathtub.Level);
+			BuyItem (bathtub.Price, bathtub.Level);
 			bathtub.Level++;
 			UpdateQps (bathtub.Qps);
+			bathtub.Price = CalculateItemPrice(bathtub.Qps);
 
 			Text bathtubLevelText = GameObject.Find ("BathtubLevelText").GetComponent<Text> ();
 			bathtubLevelText.text = UpdateItemLevel (bathtub.Level);
 			Text bathtubPriceText = GameObject.Find ("BathtubPriceText").GetComponent<Text> ();
-			bathtubPriceText.text = UpdateItemPrice (bathtub.Level, bathtub.QuackPrices);
+			bathtubPriceText.text = UpdateItemPrice (bathtub.Level, bathtub.LevelCount, bathtub.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
@@ -1093,16 +1202,17 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void WashingMachineUpgrade()
 	{
-		if (BuyQualify (washingMachine.Level, washingMachine.QuackPrices)) {
+		if (BuyQualify (washingMachine.Level, washingMachine.LevelCount, washingMachine.Price)) {
 
-			BuyItem (washingMachine.QuackPrices, washingMachine.Level);
+			BuyItem (washingMachine.Price, washingMachine.Level);
 			washingMachine.Level++;
 			UpdateQps (washingMachine.Qps);
+			washingMachine.Price = CalculateItemPrice(washingMachine.Qps);
 
 			Text washingMachineLevelText = GameObject.Find ("WashingMachineLevelText").GetComponent<Text> ();
 			washingMachineLevelText.text = UpdateItemLevel (washingMachine.Level);
 			Text washingMachinePriceText = GameObject.Find ("WashingMachinePriceText").GetComponent<Text> ();
-			washingMachinePriceText.text = UpdateItemPrice (washingMachine.Level, washingMachine.QuackPrices);
+			washingMachinePriceText.text = UpdateItemPrice (washingMachine.Level, washingMachine.LevelCount, washingMachine.Qps);
 
 			UpdateGameData ();
 			SaveGameData ();
