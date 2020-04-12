@@ -92,7 +92,9 @@ public class CGTCookieManager : MonoBehaviour {
 	public Item bathtub = new Item (0, 100, 1, 50000000, "Bathtub");
 	public Item washingMachine = new Item (0, 100, 1, 100000000, "WashingMachine"); 
 
-	[Header("Item Level Texts")]
+	[Header("Item Texts")]
+	public Text quacks;
+
 	public Text powerClickLevelText;
 	public Text toothbrushLevelText;
 	public Text toothpasteLevelText;
@@ -722,6 +724,7 @@ public class CGTCookieManager : MonoBehaviour {
 	public void GameItems()
 	{
 		ButtonSound ();
+		UpdateQuacksText();
 		ShowItemsMenu ();
 	}
 
@@ -763,6 +766,11 @@ public class CGTCookieManager : MonoBehaviour {
 
 	#region ----------------- ITEMS --------------------
 
+	public void UpdateQuacksText()
+	{
+		quacks.text = quackScore + " Quacks";
+	}
+
 	public bool BuyQualify(int itemLevel, int itemLevelCount, ulong itemPrice){
 
 		if ((itemLevel < itemLevelCount) && (quackScore >= itemPrice)) {
@@ -782,6 +790,7 @@ public class CGTCookieManager : MonoBehaviour {
 
 		PlaySound (gameBonusClickSound [Random.Range (0, gameBonusClickSound.Length)]);
 		quackScore = quackScore - itemPrice;
+		UpdateQuacksText();
 
 	}
 
