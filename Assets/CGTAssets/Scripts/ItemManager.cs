@@ -24,7 +24,7 @@ public class ItemManager : MonoBehaviour
 	public Item towel = new Item (0, 100, 1, 50000, "Towel");
 	public Item towelRack = new Item (0, 100, 1, 100000, "TowelRack");
 	public Item hairDryer = new Item (0, 100, 1, 500000, "HairDryer");
-	public Item sink = new Item (0, 100, 1, 10000000, "Sink");
+	public Item sink = new Item (0, 100, 1, 1000000, "Sink");
 	public Item toilet = new Item (0, 100, 1, 5000000, "Toilet");
 	public Item shower = new Item (0, 100, 1, 10000000, "Shower");
 	public Item bathtub = new Item (0, 100, 1, 50000000, "Bathtub");
