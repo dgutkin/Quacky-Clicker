@@ -71,6 +71,7 @@ public class CGTCookieManager : MonoBehaviour {
     private int levelBonusSub = 5;
 	private ulong levelQps = 0;
 	private ulong levelQpsShown = 0;
+	private int MultiplierTime = 10;
 
     private float gameTimer = 0.0f;
 	private ulong gameSeconds = 0;
@@ -135,11 +136,11 @@ public class CGTCookieManager : MonoBehaviour {
 				rotatingBackground.GetComponent<SpriteRenderer> ().color = Color.red;
 				GetComponent<AudioSource>().PlayOneShot(powerUpSound);
 
-			} else if (multiplierOn && multiplierTimer <= 5) {
+			} else if (multiplierOn && multiplierTimer <= MultiplierTime) {
 				
 				multiplierTimer++;
 
-			} else if (multiplierOn && multiplierTimer > 5) {
+			} else if (multiplierOn && multiplierTimer > MultiplierTime) {
 				
 				clickMultiplier = 1;
 				multiplierTimer = 0;
