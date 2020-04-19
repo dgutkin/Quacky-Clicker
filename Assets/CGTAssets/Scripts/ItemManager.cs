@@ -218,7 +218,7 @@ public class ItemManager : MonoBehaviour
 
     public void UpdateQuacksText(ulong quackScore)
 	{
-		quackCountText.text = quackScore.ToString() + " Quacks";
+		quackCountText.text = quackScore.ToString("N0") + " Quacks";
 	}
 
 	public ulong CalculatePowerClickPrice(int itemLevel)
