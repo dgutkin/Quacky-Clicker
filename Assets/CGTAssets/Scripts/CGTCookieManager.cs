@@ -60,6 +60,8 @@ public class CGTCookieManager : MonoBehaviour {
 	public ulong baseQps = 0;
 	public ulong quackScore = 0;
 
+	public Number number = new Number();
+
 	private ulong currentBonus;
 	private ulong levelBonus = 1;
 	private ulong levelBonusMulti = 1;
@@ -351,7 +353,7 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void SetMaxBonusText() 
 	{
-		gameMaxBonusText.text = FormatLargeNumber(RoundLargeNumber(levelBonus));
+		gameMaxBonusText.text = number.FormatLargeNumber(number.RoundLargeNumber(levelBonus));
 	}
 
     public void CreateTextScore(int scoreValue)
@@ -444,44 +446,44 @@ public class CGTCookieManager : MonoBehaviour {
 	// 	return RoundLargeNumber(itemPrice);
 	// }
 
-	public ulong RoundLargeNumber(ulong Number)
-	{
-		int numberSize = (int) Mathf.Floor(Mathf.Log10(Number));	
+	// public ulong RoundLargeNumber(ulong Number)
+	// {
+	// 	int numberSize = (int) Mathf.Floor(Mathf.Log10(Number));	
 
-		if (numberSize < 3) {
-			Number = Number / 1 * 1;
-		} else if (numberSize < 6) {
-			Number = (Number / 1000) * 1000;
-		} else if (numberSize < 9) {
-			Number = (Number / 1000000) * 1000000;
-		} else if (numberSize < 12) {
-			Number = (Number / 1000000000) * 1000000000;
-		} else if (numberSize < 15) {
-			Number = (Number / 1000000000000) * 1000000000000;
-		}
+	// 	if (numberSize < 3) {
+	// 		Number = Number / 1 * 1;
+	// 	} else if (numberSize < 6) {
+	// 		Number = (Number / 1000) * 1000;
+	// 	} else if (numberSize < 9) {
+	// 		Number = (Number / 1000000) * 1000000;
+	// 	} else if (numberSize < 12) {
+	// 		Number = (Number / 1000000000) * 1000000000;
+	// 	} else if (numberSize < 15) {
+	// 		Number = (Number / 1000000000000) * 1000000000000;
+	// 	}
 
-		return Number;
-	}
+	// 	return Number;
+	// }
 
-	public string FormatLargeNumber(ulong Number)
-	{
-		int numberSize = (int) Mathf.Floor(Mathf.Log10(Number));
-		string formattedNumber = "";
+	// public string FormatLargeNumber(ulong Number)
+	// {
+	// 	int numberSize = (int) Mathf.Floor(Mathf.Log10(Number));
+	// 	string formattedNumber = "";
 
-		if (numberSize < 3) {
-			formattedNumber = Number.ToString ("F0");
-		} else if (numberSize < 6) {
-			formattedNumber = (Number / 1000).ToString ("F0") + "k";
-		} else if (numberSize < 9) {
-			formattedNumber = (Number / 1000000).ToString ("F0") + "mn";
-		} else if (numberSize < 12) {
-			formattedNumber = (Number / 1000000000).ToString ("F0") + "bn";
-		} else if (numberSize < 15) {
-			formattedNumber = (Number / 1000000000000).ToString ("F0") + "tn";
-		}
+	// 	if (numberSize < 3) {
+	// 		formattedNumber = Number.ToString ("F0");
+	// 	} else if (numberSize < 6) {
+	// 		formattedNumber = (Number / 1000).ToString ("F0") + "k";
+	// 	} else if (numberSize < 9) {
+	// 		formattedNumber = (Number / 1000000).ToString ("F0") + "mn";
+	// 	} else if (numberSize < 12) {
+	// 		formattedNumber = (Number / 1000000000).ToString ("F0") + "bn";
+	// 	} else if (numberSize < 15) {
+	// 		formattedNumber = (Number / 1000000000000).ToString ("F0") + "tn";
+	// 	}
 
-		return formattedNumber;
-	}
+	// 	return formattedNumber;
+	// }
 
 	#endregion
 
