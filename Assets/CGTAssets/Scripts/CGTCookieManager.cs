@@ -284,13 +284,12 @@ public class CGTCookieManager : MonoBehaviour {
     }
 
     public void Tap(Vector3 aimPosition)
-    {
-		levelQps = levelQps + (ulong) (clickValue * clickMultiplier);
-
-        
+    {   
         RaycastHit2D raycastHit2D = Physics2D.Raycast(aimPosition, Vector2.zero);
         if (raycastHit2D.collider != null)
         {
+        	levelQps = levelQps + (ulong) (clickValue * clickMultiplier);
+        	
             if (raycastHit2D.collider.tag == "Bonus")
             {
                 PlaySound(gameBonusClickSound[Random.Range(0, gameBonusClickSound.Length)]);
