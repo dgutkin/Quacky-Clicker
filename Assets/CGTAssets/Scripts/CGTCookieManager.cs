@@ -39,6 +39,7 @@ public class CGTCookieManager : MonoBehaviour {
     public Text gameQpsText;
     public Text gameMaxBonusText;
     public Text gameTimeText;
+    public Text gameTimeCompletedText;
 
     public Slider bonusBar;
 
@@ -54,6 +55,7 @@ public class CGTCookieManager : MonoBehaviour {
     public GameObject gameCanvas;
 	public GameObject itemsCanvas;
     public GameObject gameOverCanvas;
+    public GameObject gameTimeCanvas;
 
 	[Header("Click")]
 	public int clickValue = 1;
@@ -342,7 +344,7 @@ public class CGTCookieManager : MonoBehaviour {
 		animator.SetBool("Tap", false);
 	}
 
-	public void DisplayGameTime()
+	public string DisplayGameTime()
 	{
 		ulong gameHours = 0;
 		ulong gameMinutes = 0;
@@ -359,7 +361,7 @@ public class CGTCookieManager : MonoBehaviour {
 
 		gameSecondsRemainder = gameSeconds - (gameHours * secondsInHour) - (gameMinutes * secondsInMinute);
 		
-		gameTimeText.text = "Completed in " + gameHours.ToString() + "h " + gameMinutes.ToString() + "m " + gameSecondsRemainder.ToString() + "s";
+		return gameHours.ToString() + "h " + gameMinutes.ToString() + "m " + gameSecondsRemainder.ToString() + "s";
 
 	}
 
@@ -378,6 +380,7 @@ public class CGTCookieManager : MonoBehaviour {
 			currentBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "CURRENT_BONUS", "0"));
 			clickValue = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "CLICK_VALUE", 1);
 			baseQps = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "BASE_QPS", "0"));
+			gameSeconds = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "GAME_SECONDS" ,"0"));
 
 			GameObject itemManager = GameObject.Find("ItemManager");
 			ItemManager itemManagerScript = itemManager.GetComponent<ItemManager>();
@@ -431,6 +434,7 @@ public class CGTCookieManager : MonoBehaviour {
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "CURRENT_BONUS", currentBonus.ToString());
 			PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "CLICK_VALUE", clickValue);
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "BASE_QPS", baseQps.ToString());
+			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "GAME_SECONDS", gameSeconds.ToString());
 
 			GameObject itemManager = GameObject.Find("ItemManager");
 			ItemManager itemManagerScript = itemManager.GetComponent<ItemManager>();
@@ -456,6 +460,7 @@ public class CGTCookieManager : MonoBehaviour {
         gameCanvas.SetActive(true);
 		itemsCanvas.SetActive (false);
         gameOverCanvas.SetActive(false);
+        gameTimeCanvas.SetActive(false);
     }
 
     public void ShowItemsMenu()
@@ -463,11 +468,21 @@ public class CGTCookieManager : MonoBehaviour {
 		itemsCanvas.SetActive (true);
 		gameOverCanvas.SetActive(false);
 		gameCanvas.SetActive(false);
+		gameTimeCanvas.SetActive(false);
     }
 
 	public void ShowGameOverMenu()
 	{
 		gameOverCanvas.SetActive (true);
+		gameCanvas.SetActive (false);
+		itemsCanvas.SetActive (false);
+		gameTimeCanvas.SetActive(false);
+	}
+
+	public void ShowGameInfoMenu()
+	{
+		gameTimeCanvas.SetActive(true);
+		gameOverCanvas.SetActive (false);
 		gameCanvas.SetActive (false);
 		itemsCanvas.SetActive (false);
 	}
@@ -487,10 +502,17 @@ public class CGTCookieManager : MonoBehaviour {
 		ShowGamePlayMenu();
     }
 
+    public void GameInfo()
+    {
+    	ButtonSound();
+    	gameTimeText.text = "Time played : " + DisplayGameTime();
+    	ShowGameInfoMenu();
+    }
+
 	public void GameOver()
 	{
 		ButtonSound();
-		DisplayGameTime();
+		gameTimeCompletedText.text = " Completed in : " + DisplayGameTime();
 		ShowGameOverMenu();
 	}
 
