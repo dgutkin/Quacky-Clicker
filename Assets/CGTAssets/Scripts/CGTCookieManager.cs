@@ -55,7 +55,7 @@ public class CGTCookieManager : MonoBehaviour {
     public GameObject gameCanvas;
 	public GameObject itemsCanvas;
     public GameObject gameOverCanvas;
-    public GameObject gameTimeCanvas;
+    public GameObject gameInfoCanvas;
 
 	[Header("Click")]
 	public int clickValue = 1;
@@ -336,7 +336,7 @@ public class CGTCookieManager : MonoBehaviour {
 	public void ButtonSound()
 	{
 		if (buttonClickSound != null)
-			CGTSoundManager.instance.PlaySound(buttonClickSound); 
+			CGTSoundManager.instance.PlaySound(buttonClickSound);
 	}
 
 	public void TapFalse()
@@ -460,7 +460,7 @@ public class CGTCookieManager : MonoBehaviour {
         gameCanvas.SetActive(true);
 		itemsCanvas.SetActive (false);
         gameOverCanvas.SetActive(false);
-        gameTimeCanvas.SetActive(false);
+        gameInfoCanvas.SetActive(false);
     }
 
     public void ShowItemsMenu()
@@ -468,7 +468,7 @@ public class CGTCookieManager : MonoBehaviour {
 		itemsCanvas.SetActive (true);
 		gameOverCanvas.SetActive(false);
 		gameCanvas.SetActive(false);
-		gameTimeCanvas.SetActive(false);
+		gameInfoCanvas.SetActive(false);
     }
 
 	public void ShowGameOverMenu()
@@ -476,12 +476,12 @@ public class CGTCookieManager : MonoBehaviour {
 		gameOverCanvas.SetActive (true);
 		gameCanvas.SetActive (false);
 		itemsCanvas.SetActive (false);
-		gameTimeCanvas.SetActive(false);
+		gameInfoCanvas.SetActive(false);
 	}
 
 	public void ShowGameInfoMenu()
 	{
-		gameTimeCanvas.SetActive(true);
+		gameInfoCanvas.SetActive(true);
 		gameOverCanvas.SetActive (false);
 		gameCanvas.SetActive (false);
 		itemsCanvas.SetActive (false);
