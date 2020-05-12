@@ -6,7 +6,8 @@ using UnityEngine.SocialPlatforms;
 public class LeaderboardManager : MonoBehaviour
 {
 
-	ILeaderboard leaderboard;
+	ILeaderboard highQuacksLeaderboard;
+	ILeaderboard bestTimesLeaderboard;
 
     // Start is called before the first frame update
     void Start()
@@ -16,12 +17,21 @@ public class LeaderboardManager : MonoBehaviour
                 //do something on success if you like
             });
 
-		leaderboard = Social.CreateLeaderboard();
-        leaderboard.id = "HighQuacks";
-        leaderboard.LoadScores(result =>
+		highQuacksLeaderboard = Social.CreateLeaderboard();
+        highQuacksLeaderboard.id = "HighQuacks";
+        highQuacksLeaderboard.LoadScores(result =>
         {
-            Debug.Log("Received " + leaderboard.scores.Length + " scores");
-            foreach (IScore score in leaderboard.scores)
+            Debug.Log("Received " + highQuacksLeaderboard.scores.Length + " scores");
+            foreach (IScore score in highQuacksLeaderboard.scores)
+                Debug.Log(score);
+        });
+
+        bestTimesLeaderboard = Social.CreateLeaderboard();
+        bestTimesLeaderboard.id = "BestTimes";
+        bestTimesLeaderboard.LoadScores(result =>
+        {
+            Debug.Log("Received " + bestTimesLeaderboard.scores.Length + " scores");
+            foreach (IScore score in bestTimesLeaderboard.scores)
                 Debug.Log(score);
         });
     }
@@ -36,14 +46,15 @@ public class LeaderboardManager : MonoBehaviour
     {
         if (Social.localUser.authenticated) {
             Social.ShowLeaderboardUI ();
-            // get the quackScore from the CGTCookieManager and report to the leaderboard
+            
             GameObject duckManager = GameObject.Find("DuckManager");
 			CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-			ReportScore((long) duckManagerScript.quackScore, leaderboard.id);
+			ReportScore((long) duckManagerScript.quackScore, highQuacksLeaderboard.id);
+
         }
     }
 
-    void ReportScore(long score, string leaderboardID)
+    public void ReportScore(long score, string leaderboardID)
     {
         Debug.Log("Reporting score " + score + " on leaderboard " + leaderboardID);
         Social.ReportScore(score, leaderboardID, success => {

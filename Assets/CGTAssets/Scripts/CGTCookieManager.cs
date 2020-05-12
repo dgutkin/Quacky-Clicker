@@ -80,7 +80,7 @@ public class CGTCookieManager : MonoBehaviour {
 	private int multiplierTimer = 0;
 	private bool multiplierOn = false;
 
-	private ulong maxQuacks = (ulong) Mathf.Pow (10, 13) - 1;
+	private ulong maxQuacks = 9999999999999;
      
     private Animator animator;
 
@@ -167,7 +167,7 @@ public class CGTCookieManager : MonoBehaviour {
             gameTimer = 0;
             UpdateGameData();
 			
-			if (gameSeconds < (ulong)Mathf.Pow (10, 13) - 1) {
+			if (gameSeconds < 9999999999999) {
 
 				gameSeconds++;
 
@@ -374,7 +374,7 @@ public class CGTCookieManager : MonoBehaviour {
 		#if UNITY_5_3_OR_NEWER
 	        
 			PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
-			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "0"));
+			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "9999999999990"));
 			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", "10"));
 			levelBonusMulti = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUSMULTI", "1"));
 			currentBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "CURRENT_BONUS", "0"));
@@ -513,6 +513,12 @@ public class CGTCookieManager : MonoBehaviour {
 	{
 		ButtonSound();
 		gameTimeCompletedText.text = " Completed in : " + DisplayGameTime();
+
+		GameObject leaderboardManager = GameObject.Find("LeaderboardManager");
+		LeaderboardManager leaderboardManagerScript = leaderboardManager.GetComponent<LeaderboardManager>();
+		leaderboardManagerScript.ReportScore((long) quackScore, "HighQuacks");
+		leaderboardManagerScript.ReportScore((long) gameSeconds, "BestTimes");
+
 		ShowGameOverMenu();
 	}
 
