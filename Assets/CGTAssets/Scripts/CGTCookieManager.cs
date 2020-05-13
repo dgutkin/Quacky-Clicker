@@ -300,7 +300,7 @@ public class CGTCookieManager : MonoBehaviour {
 
     public void CreateSmallDuck()
     {
-        float spawnObjectXPos = Random.Range(-4.0f, 4.0f);
+        float spawnObjectXPos = Random.Range(-2.0f, 2.0f);
         Vector3 spawnObjectPos = new Vector3(spawnObjectXPos, spawnLine.position.y, 0);
         spawnSmallDuck = spawnDuckObjects[Random.Range(0, spawnDuckObjects.Length)];
         GameObject newSmallDuck = (GameObject)(Instantiate(spawnSmallDuck, spawnObjectPos, Quaternion.identity));
@@ -310,7 +310,7 @@ public class CGTCookieManager : MonoBehaviour {
     public void CreateBonusDuck()
     {
 		for (int i = 0; i < Random.Range (1, 6); i++) {
-			float spawnObjectXPos = Random.Range (-3.0f, 3.0f);
+			float spawnObjectXPos = Random.Range (-1.5f, 1.5f);
 			Vector3 spawnObjectPos = new Vector3 (spawnObjectXPos, spawnLine.position.y, 0);
 			spawnBonusDuck = spawnBonusObjects [Random.Range (0, spawnBonusObjects.Length)];
 			GameObject newBonusDuck = (GameObject)(Instantiate (spawnBonusDuck, spawnObjectPos, Quaternion.identity));
@@ -320,7 +320,7 @@ public class CGTCookieManager : MonoBehaviour {
 
 	public void CreateBubble()
 	{
-		float spawnObjectXPos = Random.Range(-4.0f, 4.0f);
+		float spawnObjectXPos = Random.Range(-2.0f, 2.0f);
 		Vector3 spawnObjectPos = new Vector3(spawnObjectXPos, spawnLine.position.y, 0);
 		spawnBubble = spawnBubbleObjects[Random.Range(0, spawnBubbleObjects.Length)];
 		GameObject newBubble = (GameObject)(Instantiate(spawnBubble, spawnObjectPos, Quaternion.identity));
@@ -374,7 +374,7 @@ public class CGTCookieManager : MonoBehaviour {
 		#if UNITY_5_3_OR_NEWER
 	        
 			PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
-			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "9999999999990"));
+			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "0"));
 			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", "10"));
 			levelBonusMulti = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUSMULTI", "1"));
 			currentBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "CURRENT_BONUS", "0"));
