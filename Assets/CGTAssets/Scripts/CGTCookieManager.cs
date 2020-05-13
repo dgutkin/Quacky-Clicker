@@ -263,7 +263,7 @@ public class CGTCookieManager : MonoBehaviour {
             PlaySound(gameBonusSound);
             for (int i = 0; i < levelBonusQuacks; i++)
             {
-                CreateBonusDuck();
+                StartCoroutine(CreateBonusDuck());
             }
             currentBonus = currentBonus - levelBonus;
             SetBonusLevel();
@@ -307,14 +307,15 @@ public class CGTCookieManager : MonoBehaviour {
 		Destroy (newSmallDuck, 3.0f);
     }
 
-    public void CreateBonusDuck()
+    public IEnumerator CreateBonusDuck()
     {
-		for (int i = 0; i < Random.Range (1, 6); i++) {
+		for (int i = 0; i < Random.Range (2, 6); i++) {
 			float spawnObjectXPos = Random.Range (-1.5f, 1.5f);
 			Vector3 spawnObjectPos = new Vector3 (spawnObjectXPos, spawnLine.position.y, 0);
 			spawnBonusDuck = spawnBonusObjects [Random.Range (0, spawnBonusObjects.Length)];
 			GameObject newBonusDuck = (GameObject)(Instantiate (spawnBonusDuck, spawnObjectPos, Quaternion.identity));
 			Destroy (newBonusDuck, 5.0f);
+			yield return new WaitForSeconds(1.0f);
 		}
     }
 
