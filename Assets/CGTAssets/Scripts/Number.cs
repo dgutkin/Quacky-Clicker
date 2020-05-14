@@ -13,19 +13,19 @@ using UnityEngine;
     public ulong RoundLargeNumber(ulong Number)
 	{
 		int numberSize = (int) Mathf.Floor(Mathf.Log10(Number));	
-
+		Debug.Log(Number.ToString());
 		if (numberSize < 3) {
-			Number = Number / 1 * 1;
+			Number = (ulong) Mathf.Round(Number / 1f) * 1;
 		} else if (numberSize < 6) {
-			Number = (Number / 1000) * 1000;
+			Number = (ulong) Mathf.Round(Number / 1000f) * 1000;
 		} else if (numberSize < 9) {
-			Number = (Number / 1000000) * 1000000;
+			Number = (ulong) Mathf.Round(Number / 1000000f) * 1000000;
 		} else if (numberSize < 12) {
-			Number = (Number / 1000000000) * 1000000000;
+			Number = (ulong) Mathf.Round(Number / 1000000000f) * 1000000000;
 		} else if (numberSize < 15) {
-			Number = (Number / 1000000000000) * 1000000000000;
+			Number = (ulong) Mathf.Round(Number / 1000000000000f) * 1000000000000;
 		}
-
+		Debug.Log(Number.ToString());
 		return Number;
 	}
 

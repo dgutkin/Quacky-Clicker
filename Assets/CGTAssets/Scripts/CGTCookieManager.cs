@@ -166,6 +166,7 @@ public class CGTCookieManager : MonoBehaviour {
 			levelQps = 0;
             gameTimer = 0;
             UpdateGameData();
+            UpdateBonusData();
 			
 			if (gameSeconds < 9999999999999) {
 
@@ -249,14 +250,14 @@ public class CGTCookieManager : MonoBehaviour {
     {
 		quackScore += (ulong) scoreValue;
         UpdateGameData();
-        UpdateBonusData(scoreValue);
+        UpdateBonusData();
         SaveGameData();
         CreateTextScore(scoreValue);
     }
 
-    void UpdateBonusData(int scoreValue)
+    void UpdateBonusData()
     {
-		currentBonus += (ulong) scoreValue;
+		currentBonus = quackScore;
        
         if (currentBonus >= levelBonus)
         {
@@ -265,8 +266,9 @@ public class CGTCookieManager : MonoBehaviour {
             {
                 StartCoroutine(CreateBonusDuck());
             }
-            currentBonus = currentBonus - levelBonus;
+            
             SetBonusLevel();
+            SetMaxBonusText();
             bonusBar.minValue = 0;
 			bonusBar.maxValue = (float) levelBonus;  
         }
@@ -280,13 +282,13 @@ public class CGTCookieManager : MonoBehaviour {
             levelBonusMulti *= 10;
         }
 		levelBonusSub = (int) Mathf.Ceil(5 * levelBonusMulti); //bonus duck multiplier
-		levelBonus += (ulong) (10 * levelBonusSub * clickValue * clickMultiplier) + (30 * baseQps); //10 bonus ducks + 30s of base QPS
-		SetMaxBonusText();
+		levelBonus += (ulong) ((3 + (6 * 3)) * levelBonusSub * clickValue) + 15 * (baseQps + (ulong) clickValue); //best bonus ducks, add buffer and 5s of bonus clicks
+		levelBonus = number.RoundLargeNumber(levelBonus);
     }
 
 	public void SetMaxBonusText() 
 	{
-		gameMaxBonusText.text = number.FormatLargeNumber(number.RoundLargeNumber(levelBonus));
+		gameMaxBonusText.text = number.FormatLargeNumber(levelBonus);
 	}
 
     public void CreateTextScore(int scoreValue)
@@ -418,11 +420,7 @@ public class CGTCookieManager : MonoBehaviour {
         {
 			gameQuacksText.text = quackScore.ToString("N0") + " Quacks!";
             gameQpsText.text = levelQpsShown.ToString("N1") + " per second";
-        }
-        else
-        {
-           /* gameOverScoreText.text = "Score: " + lastGameScore.ToString();
-            gameOverHighScoreText.text = "High Score: " + highGameScore.ToString(); */
+            bonusBar.value = quackScore;
         }
     }
 
