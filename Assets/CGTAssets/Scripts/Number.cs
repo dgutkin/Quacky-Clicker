@@ -13,7 +13,7 @@ using UnityEngine;
     public ulong RoundLargeNumber(ulong Number)
 	{
 		int numberSize = (int) Mathf.Floor(Mathf.Log10(Number));	
-		Debug.Log(Number.ToString());
+		
 		if (numberSize < 3) {
 			Number = (ulong) Mathf.Round(Number / 1f) * 1;
 		} else if (numberSize < 6) {
@@ -25,7 +25,7 @@ using UnityEngine;
 		} else if (numberSize < 15) {
 			Number = (ulong) Mathf.Round(Number / 1000000000000f) * 1000000000000;
 		}
-		Debug.Log(Number.ToString());
+		
 		return Number;
 	}
 

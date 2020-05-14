@@ -9,26 +9,26 @@ public class ItemManager : MonoBehaviour
 
 	[Header("Items")]
 
-	public Item powerClick = new Item(0, 30, 1, 0, "PowerClick");
-	public Item toothbrush = new Item(0, 100, 1, 1, "Toothbrush");
-	public Item toothpaste = new Item (0, 100, 1, 2, "Toothpaste");
-	public Item soap = new Item(0, 100, 1, 5, "Soap");
-	public Item sponge = new Item (0, 100, 1, 10, "Sponge");
-	public Item deodorant = new Item (0, 100, 1, 20, "Deodorant");
-	public Item toiletPaper = new Item (0, 100, 1, 50, "ToiletPaper");
-	public Item hairbrush = new Item (0, 100, 1, 100, "HairBrush");
-	public Item toiletBrush = new Item (0, 100, 1, 500, "ToiletBrush");
-	public Item plunger = new Item (0, 100, 1, 1000, "Plunger");
-	public Item scale = new Item (0, 100, 1, 5000, "Scale");
-	public Item ovalMirror = new Item (0, 100, 1, 10000, "OvalMirror");
-	public Item towel = new Item (0, 100, 1, 50000, "Towel");
-	public Item towelRack = new Item (0, 100, 1, 100000, "TowelRack");
-	public Item hairDryer = new Item (0, 100, 1, 500000, "HairDryer");
-	public Item sink = new Item (0, 100, 1, 1000000, "Sink");
-	public Item toilet = new Item (0, 100, 1, 5000000, "Toilet");
-	public Item shower = new Item (0, 100, 1, 10000000, "Shower");
-	public Item bathtub = new Item (0, 100, 1, 50000000, "Bathtub");
-	public Item washingMachine = new Item (0, 100, 1, 100000000, "WashingMachine");
+	public Item powerClick = new Item(0, 25, 1, 0, "PowerClick");
+	public Item toothbrush = new Item(0, 10, 1, 1, "Toothbrush");
+	public Item toothpaste = new Item (0, 10, 1, 2, "Toothpaste");
+	public Item soap = new Item(0, 10, 1, 5, "Soap");
+	public Item sponge = new Item (0, 10, 1, 10, "Sponge");
+	public Item deodorant = new Item (0, 10, 1, 20, "Deodorant");
+	public Item toiletPaper = new Item (0, 10, 1, 50, "ToiletPaper");
+	public Item hairbrush = new Item (0, 10, 1, 100, "HairBrush");
+	public Item toiletBrush = new Item (0, 10, 1, 500, "ToiletBrush");
+	public Item plunger = new Item (0, 10, 1, 1000, "Plunger");
+	public Item scale = new Item (0, 10, 1, 5000, "Scale");
+	public Item ovalMirror = new Item (0, 10, 1, 10000, "OvalMirror");
+	public Item towel = new Item (0, 10, 1, 50000, "Towel");
+	public Item towelRack = new Item (0, 10, 1, 100000, "TowelRack");
+	public Item hairDryer = new Item (0, 10, 1, 500000, "HairDryer");
+	public Item sink = new Item (0, 10, 1, 1000000, "Sink");
+	public Item toilet = new Item (0, 10, 1, 5000000, "Toilet");
+	public Item shower = new Item (0, 10, 1, 10000000, "Shower");
+	public Item bathtub = new Item (0, 10, 1, 50000000, "Bathtub");
+	public Item washingMachine = new Item (0, 10, 1, 100000000, "WashingMachine");
 
 	[Header("Item Texts")]
 

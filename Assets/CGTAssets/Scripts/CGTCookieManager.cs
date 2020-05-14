@@ -79,8 +79,8 @@ public class CGTCookieManager : MonoBehaviour {
 	private ulong gameSeconds = 0;
 	private int multiplierTimer = 0;
 	private bool multiplierOn = false;
-
-	private ulong maxQuacks = 9999999999999;
+	
+	private ulong maxQuacks = 1000000000000;
      
     private Animator animator;
 
