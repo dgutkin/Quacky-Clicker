@@ -169,7 +169,7 @@ public class CGTCookieManager : MonoBehaviour {
             UpdateGameData();
             UpdateBonusData();
 			
-			if (gameSeconds < 9999999999999) {
+			if (gameSeconds < 1000000000000) {
 
 				gameSeconds++;
 
@@ -177,6 +177,7 @@ public class CGTCookieManager : MonoBehaviour {
 
 			if (quackScore >= maxQuacks) {
 
+				quackScore = maxQuacks;
 				GameOver ();
 
 			}
@@ -312,7 +313,7 @@ public class CGTCookieManager : MonoBehaviour {
 
     public IEnumerator CreateBonusDuck()
     {
-		for (int i = 0; i < Random.Range (0, 0); i++) { //change back to 2,6
+		for (int i = 0; i < Random.Range (2, 6); i++) {
 			float spawnObjectXPos = Random.Range (-1.5f, 1.5f);
 			Vector3 spawnObjectPos = new Vector3 (spawnObjectXPos, spawnLine.position.y, 0);
 			spawnBonusDuck = spawnBonusObjects [Random.Range (0, spawnBonusObjects.Length)];
