@@ -44,11 +44,13 @@ public class LeaderboardManager : MonoBehaviour
 
 	public void ShowLeaderboard ()
     {
+        GameObject duckManager = GameObject.Find("DuckManager");
+        CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
+        duckManagerScript.ButtonSound();
+
         if (Social.localUser.authenticated) {
             Social.ShowLeaderboardUI ();
             
-            GameObject duckManager = GameObject.Find("DuckManager");
-			CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
 			ReportScore((long) duckManagerScript.quackScore, highQuacksLeaderboard.id);
 
         }
