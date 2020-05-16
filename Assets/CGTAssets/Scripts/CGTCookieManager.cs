@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 
 #if UNITY_5_3_OR_NEWER
 using UnityEngine.SceneManagement;
@@ -91,6 +92,8 @@ public class CGTCookieManager : MonoBehaviour {
     internal Vector3 aimMousePosition;
     internal Vector3 aimTouchPosition;
 
+    string gameID = "3608416"; // different for the android version
+
 	#region --------------- GAME MECHANICS ---------------
 
     void Awake()
@@ -117,6 +120,9 @@ public class CGTCookieManager : MonoBehaviour {
         SetGameData();
         UpdateGameData();
         ShowGamePlayMenu();
+
+        Advertisement.Initialize(gameID, true);
+
     }
 
     void Update()
@@ -494,6 +500,8 @@ public class CGTCookieManager : MonoBehaviour {
 		GameObject itemManager = GameObject.Find("ItemManager");
 		ItemManager itemManagerScript = itemManager.GetComponent<ItemManager>();
 		itemManagerScript.UpdateQuacksText(quackScore);
+		if (Random.Range(1,4) == 1)
+			Advertisement.Show();
 		ShowItemsMenu ();
 	}
 
