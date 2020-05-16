@@ -384,7 +384,7 @@ public class CGTCookieManager : MonoBehaviour {
     {
 		#if UNITY_5_3_OR_NEWER
 	        
-			PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
+			//PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
 			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "0"));
 			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", "10"));
 			levelBonusMulti = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUSMULTI", "1"));
