@@ -158,7 +158,15 @@ public class CGTCookieManager : MonoBehaviour {
 
 			} else if (!multiplierOn && levelBonus > 100) {
 				
-				multiplierOn = Random.Range (0, 60) == 1;
+				int rand = Random.Range(0, 60);
+				if (rand == 1)
+				{
+					multiplierOn = true;
+				} else if (rand == 2 || rand == 3) {
+					
+					StartCoroutine(CreateBonusDuck(1, 1));
+
+				}
 
 			}
 
@@ -270,7 +278,7 @@ public class CGTCookieManager : MonoBehaviour {
         {
             PlaySound(gameBonusSound);
             
-            StartCoroutine(CreateBonusDuck());
+            StartCoroutine(CreateBonusDuck(2, 6));
             
             SetBonusLevel();
 
@@ -320,9 +328,9 @@ public class CGTCookieManager : MonoBehaviour {
 		Destroy (newSmallDuck, 3.0f);
     }
 
-    public IEnumerator CreateBonusDuck()
+    public IEnumerator CreateBonusDuck(int minDucks, int maxDucks)
     {
-		for (int i = 0; i < Random.Range (2, 6); i++) {
+		for (int i = 0; i < Random.Range (minDucks, maxDucks); i++) {
 			float spawnObjectXPos = Random.Range (-1.5f, 1.5f);
 			Vector3 spawnObjectPos = new Vector3 (spawnObjectXPos, spawnLine.position.y, 0);
 			spawnBonusDuck = spawnBonusObjects [Random.Range (0, spawnBonusObjects.Length)];
