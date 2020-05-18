@@ -166,26 +166,26 @@ public class ItemManager : MonoBehaviour
 		bathtubLevelText.text = UpdateItemLevel (bathtub.Level);
 		washingMachineLevelText.text = UpdateItemLevel (washingMachine.Level);
 
-		powerClickPriceText.text = "Cost: " + UpdateItemPrice(powerClick.Level, powerClick.LevelCount, powerClick.Qps, baseQps, clickValue);
-		toothbrushPriceText.text = UpdateItemPrice(toothbrush.Level, toothbrush.LevelCount, toothbrush.Qps, baseQps, clickValue);
-		toothpastePriceText.text = UpdateItemPrice(toothpaste.Level, toothpaste.LevelCount, toothpaste.Qps, baseQps, clickValue);
-		soapPriceText.text = UpdateItemPrice(soap.Level, soap.LevelCount, soap.Qps, baseQps, clickValue);
-		spongePriceText.text = UpdateItemPrice(sponge.Level, sponge.LevelCount, sponge.Qps, baseQps, clickValue);
-		deodorantPriceText.text = UpdateItemPrice(deodorant.Level, deodorant.LevelCount, deodorant.Qps, baseQps, clickValue);
-		toiletPaperPriceText.text = UpdateItemPrice(toiletPaper.Level, toiletPaper.LevelCount, toiletPaper.Qps, baseQps, clickValue);
-		hairbrushPriceText.text = UpdateItemPrice(hairbrush.Level, hairbrush.LevelCount, hairbrush.Qps, baseQps, clickValue);
-		toiletBrushPriceText.text = UpdateItemPrice(toiletBrush.Level, toiletBrush.LevelCount, toiletBrush.Qps, baseQps, clickValue);
-		plungerPriceText.text = UpdateItemPrice(plunger.Level, plunger.LevelCount, plunger.Qps, baseQps, clickValue);
-		scalePriceText.text = UpdateItemPrice(scale.Level, scale.LevelCount, scale.Qps, baseQps, clickValue);
-		ovalMirrorPriceText.text = UpdateItemPrice(ovalMirror.Level, ovalMirror.LevelCount, ovalMirror.Qps, baseQps, clickValue);
-		towelPriceText.text = UpdateItemPrice(towel.Level, towel.LevelCount, towel.Qps, baseQps, clickValue);
-		towelRackPriceText.text = UpdateItemPrice(towelRack.Level, towelRack.LevelCount, towelRack.Qps, baseQps, clickValue);
-		hairDryerPriceText.text = UpdateItemPrice(hairDryer.Level, hairDryer.LevelCount, hairDryer.Qps, baseQps, clickValue);
-		sinkPriceText.text = UpdateItemPrice(sink.Level, sink.LevelCount, sink.Qps, baseQps, clickValue);
-		toiletPriceText.text = UpdateItemPrice(toilet.Level, toilet.LevelCount, toilet.Qps, baseQps, clickValue);
-		showerPriceText.text = UpdateItemPrice(shower.Level, shower.LevelCount, shower.Qps, baseQps, clickValue);
-		bathtubPriceText.text = UpdateItemPrice(bathtub.Level, bathtub.LevelCount, bathtub.Qps, baseQps, clickValue);
-		washingMachinePriceText.text = UpdateItemPrice(washingMachine.Level, washingMachine.LevelCount, washingMachine.Qps, baseQps, clickValue);
+		powerClickPriceText.text = "Cost: " + UpdateItemPrice(powerClick.Level, powerClick.LevelCount, powerClick.Price);
+		toothbrushPriceText.text = UpdateItemPrice(toothbrush.Level, toothbrush.LevelCount, toothbrush.Price);
+		toothpastePriceText.text = UpdateItemPrice(toothpaste.Level, toothpaste.LevelCount, toothpaste.Price);
+		soapPriceText.text = UpdateItemPrice(soap.Level, soap.LevelCount, soap.Price);
+		spongePriceText.text = UpdateItemPrice(sponge.Level, sponge.LevelCount, sponge.Price);
+		deodorantPriceText.text = UpdateItemPrice(deodorant.Level, deodorant.LevelCount, deodorant.Price);
+		toiletPaperPriceText.text = UpdateItemPrice(toiletPaper.Level, toiletPaper.LevelCount, toiletPaper.Price);
+		hairbrushPriceText.text = UpdateItemPrice(hairbrush.Level, hairbrush.LevelCount, hairbrush.Price);
+		toiletBrushPriceText.text = UpdateItemPrice(toiletBrush.Level, toiletBrush.LevelCount, toiletBrush.Price);
+		plungerPriceText.text = UpdateItemPrice(plunger.Level, plunger.LevelCount, plunger.Price);
+		scalePriceText.text = UpdateItemPrice(scale.Level, scale.LevelCount, scale.Price);
+		ovalMirrorPriceText.text = UpdateItemPrice(ovalMirror.Level, ovalMirror.LevelCount, ovalMirror.Price);
+		towelPriceText.text = UpdateItemPrice(towel.Level, towel.LevelCount, towel.Price);
+		towelRackPriceText.text = UpdateItemPrice(towelRack.Level, towelRack.LevelCount, towelRack.Price);
+		hairDryerPriceText.text = UpdateItemPrice(hairDryer.Level, hairDryer.LevelCount, hairDryer.Price);
+		sinkPriceText.text = UpdateItemPrice(sink.Level, sink.LevelCount, sink.Price);
+		toiletPriceText.text = UpdateItemPrice(toilet.Level, toilet.LevelCount, toilet.Price);
+		showerPriceText.text = UpdateItemPrice(shower.Level, shower.LevelCount, shower.Price);
+		bathtubPriceText.text = UpdateItemPrice(bathtub.Level, bathtub.LevelCount, bathtub.Price);
+		washingMachinePriceText.text = UpdateItemPrice(washingMachine.Level, washingMachine.LevelCount, washingMachine.Price);
     }
 
     public void SaveItemData()
@@ -239,22 +239,13 @@ public class ItemManager : MonoBehaviour
 
 	}
 
-	public string UpdateItemPrice(int itemLevel, int itemLevelCount, int itemQps, ulong baseQps, int clickValue){
+	public string UpdateItemPrice(int itemLevel, int itemLevelCount, ulong itemPrice){
 
 		if (itemLevel == itemLevelCount) {
 
 			return "Maxed";
 
 		} else {
-
-			ulong itemPrice = 0;
-
-			if (itemQps == 0)
-			{
-				itemPrice = CalculatePowerClickPrice(itemLevel);
-			} else {
-				itemPrice = CalculateItemPrice(baseQps, clickValue, itemQps);	
-			}
 
 			return number.FormatLargeNumber(itemPrice) + " quacks";
 		}
@@ -301,7 +292,7 @@ public class ItemManager : MonoBehaviour
 			duckManagerScript.clickValue *= 2; // double the click value
 
 			powerClickLevelText.text = UpdateItemLevel (powerClick.Level);
-			powerClickPriceText.text = "Cost: " + UpdateItemPrice (powerClick.Level, powerClick.LevelCount, powerClick.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			powerClickPriceText.text = "Cost: " + UpdateItemPrice (powerClick.Level, powerClick.LevelCount, powerClick.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -320,10 +311,13 @@ public class ItemManager : MonoBehaviour
 			BuyItem (toothbrush.Price, toothbrush.Level);
 			toothbrush.Level++;
 			duckManagerScript.baseQps += (ulong) toothbrush.Qps;
-			toothbrush.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toothbrush.Qps);
+			ulong newPrice = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toothbrush.Qps);
+			if (newPrice == toothbrush.Price)
+				newPrice = number.IncrementLargeNumber(newPrice, 1);
+			toothbrush.Price = newPrice;
 
 			toothbrushLevelText.text = UpdateItemLevel (toothbrush.Level);
-			toothbrushPriceText.text = UpdateItemPrice (toothbrush.Level, toothbrush.LevelCount, toothbrush.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			toothbrushPriceText.text = UpdateItemPrice (toothbrush.Level, toothbrush.LevelCount, toothbrush.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -341,10 +335,13 @@ public class ItemManager : MonoBehaviour
 			BuyItem (toothpaste.Price, toothpaste.Level);
 			toothpaste.Level++;
 			duckManagerScript.baseQps += (ulong) toothpaste.Qps;
-			toothpaste.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toothpaste.Qps);
+			ulong newPrice = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toothbrush.Qps);
+			if (newPrice == toothpaste.Price)
+				newPrice = number.IncrementLargeNumber(newPrice, 1);
+			toothpaste.Price = newPrice;
 
 			toothpasteLevelText.text = UpdateItemLevel (toothpaste.Level);
-			toothpastePriceText.text = UpdateItemPrice (toothpaste.Level, toothpaste.LevelCount, toothpaste.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			toothpastePriceText.text = UpdateItemPrice (toothpaste.Level, toothpaste.LevelCount, toothpaste.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -365,7 +362,7 @@ public class ItemManager : MonoBehaviour
 			soap.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, soap.Qps);
 
 			soapLevelText.text = UpdateItemLevel (soap.Level);
-			soapPriceText.text = UpdateItemPrice (soap.Level, soap.LevelCount, soap.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			soapPriceText.text = UpdateItemPrice (soap.Level, soap.LevelCount, soap.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -386,7 +383,7 @@ public class ItemManager : MonoBehaviour
 			sponge.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, sponge.Qps);
 
 			spongeLevelText.text = UpdateItemLevel (sponge.Level);
-			spongePriceText.text = UpdateItemPrice (sponge.Level, sponge.LevelCount, sponge.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			spongePriceText.text = UpdateItemPrice (sponge.Level, sponge.LevelCount, sponge.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -407,7 +404,7 @@ public class ItemManager : MonoBehaviour
 			deodorant.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, deodorant.Qps);
 
 			deodorantLevelText.text = UpdateItemLevel (deodorant.Level);
-			deodorantPriceText.text = UpdateItemPrice (deodorant.Level, deodorant.LevelCount, deodorant.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			deodorantPriceText.text = UpdateItemPrice (deodorant.Level, deodorant.LevelCount, deodorant.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -428,7 +425,7 @@ public class ItemManager : MonoBehaviour
 			toiletPaper.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toiletPaper.Qps);
 
 			toiletPaperLevelText.text = UpdateItemLevel (toiletPaper.Level);
-			toiletPaperPriceText.text = UpdateItemPrice (toiletPaper.Level, toiletPaper.LevelCount, toiletPaper.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			toiletPaperPriceText.text = UpdateItemPrice (toiletPaper.Level, toiletPaper.LevelCount, toiletPaper.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -449,7 +446,7 @@ public class ItemManager : MonoBehaviour
 			hairbrush.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, hairbrush.Qps);
 
 			hairbrushLevelText.text = UpdateItemLevel (hairbrush.Level);
-			hairbrushPriceText.text = UpdateItemPrice (hairbrush.Level, hairbrush.LevelCount, hairbrush.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			hairbrushPriceText.text = UpdateItemPrice (hairbrush.Level, hairbrush.LevelCount, hairbrush.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -470,7 +467,7 @@ public class ItemManager : MonoBehaviour
 			toiletBrush.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toiletBrush.Qps);
 
 			toiletBrushLevelText.text = UpdateItemLevel (toiletBrush.Level);
-			toiletBrushPriceText.text = UpdateItemPrice (toiletBrush.Level, toiletBrush.LevelCount, toiletBrush.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			toiletBrushPriceText.text = UpdateItemPrice (toiletBrush.Level, toiletBrush.LevelCount, toiletBrush.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -491,7 +488,7 @@ public class ItemManager : MonoBehaviour
 			plunger.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, plunger.Qps);
 
 			plungerLevelText.text = UpdateItemLevel (plunger.Level);
-			plungerPriceText.text = UpdateItemPrice (plunger.Level, plunger.LevelCount, plunger.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			plungerPriceText.text = UpdateItemPrice (plunger.Level, plunger.LevelCount, plunger.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -512,7 +509,7 @@ public class ItemManager : MonoBehaviour
 			scale.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, scale.Qps);
 
 			scaleLevelText.text = UpdateItemLevel (scale.Level);
-			scalePriceText.text = UpdateItemPrice (scale.Level, scale.LevelCount, scale.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			scalePriceText.text = UpdateItemPrice (scale.Level, scale.LevelCount, scale.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -533,7 +530,7 @@ public class ItemManager : MonoBehaviour
 			ovalMirror.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, ovalMirror.Qps);
 
 			ovalMirrorLevelText.text = UpdateItemLevel (ovalMirror.Level);
-			ovalMirrorPriceText.text = UpdateItemPrice (ovalMirror.Level, ovalMirror.LevelCount, ovalMirror.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			ovalMirrorPriceText.text = UpdateItemPrice (ovalMirror.Level, ovalMirror.LevelCount, ovalMirror.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -554,7 +551,7 @@ public class ItemManager : MonoBehaviour
 			towel.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, towel.Qps);
 
 			towelLevelText.text = UpdateItemLevel (towel.Level);
-			towelPriceText.text = UpdateItemPrice (towel.Level, towel.LevelCount, towel.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			towelPriceText.text = UpdateItemPrice (towel.Level, towel.LevelCount, towel.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -575,7 +572,7 @@ public class ItemManager : MonoBehaviour
 			towelRack.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, towelRack.Qps);
 
 			towelRackLevelText.text = UpdateItemLevel (towelRack.Level);
-			towelRackPriceText.text = UpdateItemPrice (towelRack.Level, towelRack.LevelCount, towelRack.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			towelRackPriceText.text = UpdateItemPrice (towelRack.Level, towelRack.LevelCount, towelRack.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -596,7 +593,7 @@ public class ItemManager : MonoBehaviour
 			hairDryer.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, hairDryer.Qps);
 
 			hairDryerLevelText.text = UpdateItemLevel (hairDryer.Level);
-			hairDryerPriceText.text = UpdateItemPrice (hairDryer.Level, hairDryer.LevelCount, hairDryer.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			hairDryerPriceText.text = UpdateItemPrice (hairDryer.Level, hairDryer.LevelCount, hairDryer.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -617,7 +614,7 @@ public class ItemManager : MonoBehaviour
 			sink.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, sink.Qps);
 
 			sinkLevelText.text = UpdateItemLevel (sink.Level);
-			sinkPriceText.text = UpdateItemPrice (sink.Level, sink.LevelCount, sink.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			sinkPriceText.text = UpdateItemPrice (sink.Level, sink.LevelCount, sink.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -638,7 +635,7 @@ public class ItemManager : MonoBehaviour
 			toilet.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toilet.Qps);
 
 			toiletLevelText.text = UpdateItemLevel (toilet.Level);
-			toiletPriceText.text = UpdateItemPrice (toilet.Level, toilet.LevelCount, toilet.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			toiletPriceText.text = UpdateItemPrice (toilet.Level, toilet.LevelCount, toilet.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -659,7 +656,7 @@ public class ItemManager : MonoBehaviour
 			shower.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, shower.Qps);
 
 			showerLevelText.text = UpdateItemLevel (shower.Level);
-			showerPriceText.text = UpdateItemPrice (shower.Level, shower.LevelCount, shower.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			showerPriceText.text = UpdateItemPrice (shower.Level, shower.LevelCount, shower.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -680,7 +677,7 @@ public class ItemManager : MonoBehaviour
 			bathtub.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, bathtub.Qps);
 
 			bathtubLevelText.text = UpdateItemLevel (bathtub.Level);
-			bathtubPriceText.text = UpdateItemPrice (bathtub.Level, bathtub.LevelCount, bathtub.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			bathtubPriceText.text = UpdateItemPrice (bathtub.Level, bathtub.LevelCount, bathtub.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -701,7 +698,7 @@ public class ItemManager : MonoBehaviour
 			washingMachine.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, washingMachine.Qps);
 
 			washingMachineLevelText.text = UpdateItemLevel (washingMachine.Level);
-			washingMachinePriceText.text = UpdateItemPrice (washingMachine.Level, washingMachine.LevelCount, washingMachine.Qps, duckManagerScript.baseQps, duckManagerScript.clickValue);
+			washingMachinePriceText.text = UpdateItemPrice (washingMachine.Level, washingMachine.LevelCount, washingMachine.Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
