@@ -49,4 +49,23 @@ using UnityEngine;
 		return formattedNumber;
 	}
 
+	public ulong IncrementLargeNumber(ulong Number, int increment)
+	{
+		int numberSize = (int) Mathf.Floor(Mathf.Log10(Number));	
+		
+		if (numberSize < 3) {
+			Number += (ulong) increment;
+		} else if (numberSize < 6) {
+			Number += (ulong) increment * 1000;
+		} else if (numberSize < 9) {
+			Number += (ulong) increment * 1000000;
+		} else if (numberSize < 12) {
+			Number += (ulong) increment * 1000000000;
+		} else if (numberSize < 15) {
+			Number += (ulong) increment * 1000000000000;
+		}
+		
+		return Number;
+	}
+
 }

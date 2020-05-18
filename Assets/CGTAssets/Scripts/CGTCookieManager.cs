@@ -71,7 +71,6 @@ public class CGTCookieManager : MonoBehaviour {
 	private ulong levelBonusMulti = 1;
 
 	private int clickMultiplier = 1;
-    private int levelBonusQuacks = 1;
     private int levelBonusSub = 5;
 	private ulong levelQps = 0;
 	private ulong levelQpsShown = 0;
@@ -270,12 +269,11 @@ public class CGTCookieManager : MonoBehaviour {
         if (currentBonus >= levelBonus)
         {
             PlaySound(gameBonusSound);
-            for (int i = 0; i < levelBonusQuacks; i++)
-            {
-                StartCoroutine(CreateBonusDuck());
-            }
+            
+            StartCoroutine(CreateBonusDuck());
             
             SetBonusLevel();
+
             SetMaxBonusText();
             bonusBar.minValue = 0;
 			bonusBar.maxValue = (float) levelBonus;  
@@ -289,9 +287,14 @@ public class CGTCookieManager : MonoBehaviour {
         {
             levelBonusMulti *= 10;
         }
-		levelBonusSub = (int) Mathf.Ceil(5 * levelBonusMulti); //bonus duck multiplier
-		levelBonus += (ulong) ((3 + (6 * 3)) * levelBonusSub * clickValue) + 15 * (baseQps + (ulong) clickValue); //best bonus ducks, add buffer and 5s of bonus clicks
-		levelBonus = number.RoundLargeNumber(levelBonus);
+		levelBonusSub = (int) levelBonusMulti; //bonus duck multiplier
+
+		ulong levelBonusNew = levelBonus + (ulong) ((3 + (6 * 3)) * levelBonusSub * clickValue) + 15 * (baseQps + (ulong) clickValue); //best bonus ducks, add buffer and 5s of bonus clicks
+		levelBonusNew = number.RoundLargeNumber(levelBonusNew);
+		if (levelBonusNew == levelBonus)
+			levelBonusNew = number.IncrementLargeNumber(levelBonus, 1);
+			
+		levelBonus = levelBonusNew;
     }
 
 	public void SetMaxBonusText() 
