@@ -115,11 +115,8 @@ public class ItemManager : MonoBehaviour
 		shower.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "SHOWER_LEVEL", 0);
 		bathtub.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "BATHTUB_LEVEL", 0);
 		washingMachine.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "WASHINGMACHINE_LEVEL", 0);
-    }
 
-    public void SetItemData()
-    {
-    	GameObject duckManager = GameObject.Find("DuckManager");
+		GameObject duckManager = GameObject.Find("DuckManager");
 		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
     	ulong baseQps = duckManagerScript.baseQps;
     	int clickValue = duckManagerScript.clickValue;
@@ -144,6 +141,56 @@ public class ItemManager : MonoBehaviour
 		shower.Price = CalculateItemPrice(baseQps, clickValue, shower.Qps);
 		bathtub.Price = CalculateItemPrice(baseQps, clickValue, bathtub.Qps);
 		washingMachine.Price = CalculateItemPrice(baseQps, clickValue, washingMachine.Qps);
+
+		powerClick.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "POWERCLICK_PRICE", powerClick.Price.ToString()));
+		toothbrush.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOOTHBRUSH_PRICE", toothbrush.Price.ToString()));
+		toothpaste.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOOTHPASTE_PRICE", toothpaste.Price.ToString()));
+		soap.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "SOAP_PRICE", soap.Price.ToString()));
+		sponge.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "SPONGE_PRICE", sponge.Price.ToString()));
+		deodorant.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "DEODORANT_PRICE", deodorant.Price.ToString()));
+		toiletPaper.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOILETPAPER_PRICE", toiletPaper.Price.ToString()));
+		hairbrush.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "HAIRBRUSH_PRICE", hairbrush.Price.ToString()));
+		toiletBrush.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOILETBRUSH_PRICE", toiletBrush.Price.ToString()));
+		plunger.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "PLUNGER_PRICE", plunger.Price.ToString()));
+		scale.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "SCALE_PRICE", scale.Price.ToString()));
+		ovalMirror.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "OVALMIRROR_PRICE", ovalMirror.Price.ToString()));
+		towel.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOWEL_PRICE", towel.Price.ToString()));
+		towelRack.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOWELRACK_PRICE", towelRack.Price.ToString()));
+		hairDryer.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "HAIRDRYER_PRICE", hairDryer.Price.ToString()));
+		sink.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "SINK_PRICE", sink.Price.ToString()));
+		toilet.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOILET_PRICE", toilet.Price.ToString()));
+		shower.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "SHOWER_PRICE", shower.Price.ToString()));
+		bathtub.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "BATHTUB_PRICE", bathtub.Price.ToString()));
+		washingMachine.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "WASHINGMACHINE_PRICE", washingMachine.Price.ToString()));
+    }
+
+    public void SetItemData()
+    {
+  //   	GameObject duckManager = GameObject.Find("DuckManager");
+		// CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
+  //   	ulong baseQps = duckManagerScript.baseQps;
+  //   	int clickValue = duckManagerScript.clickValue;
+
+  //   	powerClick.Price = CalculatePowerClickPrice(powerClick.Level);
+		// toothbrush.Price = CalculateItemPrice(baseQps, clickValue, toothbrush.Qps);
+		// toothpaste.Price = CalculateItemPrice(baseQps, clickValue, toothpaste.Qps);
+		// soap.Price = CalculateItemPrice(baseQps, clickValue, soap.Qps);
+		// sponge.Price = CalculateItemPrice(baseQps, clickValue, sponge.Qps);
+		// deodorant.Price = CalculateItemPrice(baseQps, clickValue, deodorant.Qps);
+		// toiletPaper.Price = CalculateItemPrice(baseQps, clickValue, toiletPaper.Qps);
+		// hairbrush.Price = CalculateItemPrice(baseQps, clickValue, hairbrush.Qps);
+		// toiletBrush.Price = CalculateItemPrice(baseQps, clickValue, toiletBrush.Qps);
+		// plunger.Price = CalculateItemPrice(baseQps, clickValue, plunger.Qps);
+		// scale.Price = CalculateItemPrice(baseQps, clickValue, scale.Qps);
+		// ovalMirror.Price = CalculateItemPrice(baseQps, clickValue, ovalMirror.Qps);
+		// towel.Price = CalculateItemPrice(baseQps, clickValue, towel.Qps);
+		// towelRack.Price = CalculateItemPrice(baseQps, clickValue, towelRack.Qps);
+		// hairDryer.Price = CalculateItemPrice(baseQps, clickValue, hairDryer.Qps);
+		// sink.Price = CalculateItemPrice(baseQps, clickValue, sink.Qps);
+		// toilet.Price = CalculateItemPrice(baseQps, clickValue, toilet.Qps);
+		// shower.Price = CalculateItemPrice(baseQps, clickValue, shower.Qps);
+		// bathtub.Price = CalculateItemPrice(baseQps, clickValue, bathtub.Qps);
+		// washingMachine.Price = CalculateItemPrice(baseQps, clickValue, washingMachine.Qps);
 
 		powerClickLevelText.text = UpdateItemLevel (powerClick.Level);
 		toothbrushLevelText.text = UpdateItemLevel (toothbrush.Level);
@@ -210,6 +257,27 @@ public class ItemManager : MonoBehaviour
 		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "SHOWER_LEVEL", shower.Level);
 		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "BATHTUB_LEVEL", bathtub.Level);
 		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "WASHINGMACHINE_LEVEL", washingMachine.Level);
+
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "POWERCLICK_PRICE", powerClick.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOOTHBRUSH_PRICE", toothbrush.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOOTHPASTE_PRICE", toothpaste.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "SOAP_PRICE", soap.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "SPONGE_PRICE", sponge.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "DEODORANT_PRICE", deodorant.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOILETPAPER_PRICE", toiletPaper.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "HAIRBRUSH_PRICE", hairbrush.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOILETBRUSH_PRICE", toiletBrush.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "PLUNGER_PRICE", plunger.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "SCALE_PRICE", scale.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "OVALMIRROR_PRICE", ovalMirror.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOWEL_PRICE", towel.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOWELRACK_PRICE", towelRack.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "HAIRDRYER_PRICE", hairDryer.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "SINK_PRICE", sink.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOILET_PRICE", toilet.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "SHOWER_PRICE", shower.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "BATHTUB_PRICE", bathtub.Price.ToString());
+		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "WASHINGMACHINE_PRICE", washingMachine.Price.ToString());
     }
 
     #endregion
