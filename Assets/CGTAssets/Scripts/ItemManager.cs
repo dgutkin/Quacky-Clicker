@@ -8,7 +8,7 @@ public class ItemManager : MonoBehaviour
 {
 
 	[Header("Items")]
-
+	// items, item texts and toggles all need to be arrays
 	public Item powerClick = new Item(0, 25, 1, 0, "PowerClick");
 	public Item toothbrush = new Item(0, 10, 1, 1, "Toothbrush");
 	public Item toothpaste = new Item (0, 10, 1, 2, "Toothpaste");
@@ -79,8 +79,30 @@ public class ItemManager : MonoBehaviour
 	[Header("Sounds")]
 	public AudioClip[] gameBonusClickSound;
 
-	public Number number = new Number();
+	[Header("Background Toggles")]
+	public CGTSpriteToggle[] backgroundToggles;
+	// public CGTSpriteToggle toothbrushBackgroundToggle;
+	// public CGTSpriteToggle toothpasteBackgroundToggle;
+	// public CGTSpriteToggle soapBackgroundToggle;
+	// public CGTSpriteToggle spongeBackgroundToggle;
+	// public CGTSpriteToggle deodorantBackgroundToggle;
+	// public CGTSpriteToggle toiletPaperBackgroundToggle;
+	// public CGTSpriteToggle hairbrushBackgroundToggle;
+	// public CGTSpriteToggle toiletBrushBackgroundToggle;
+	// public CGTSpriteToggle plungerBackgroundToggle;
+	// public CGTSpriteToggle scaleBackgroundToggle;
+	// public CGTSpriteToggle ovalMirrorBackgroundToggle;
+	// public CGTSpriteToggle towelBackgroundToggle;
+	// public CGTSpriteToggle towelRackBackgroundToggle;
+	// public CGTSpriteToggle hairDryerBackgroundToggle;
+	// public CGTSpriteToggle sinkPriceBackgroundToggle;
+	// public CGTSpriteToggle toiletBackgroundToggle;
+	// public CGTSpriteToggle showerBackgroundToggle;
+	// public CGTSpriteToggle bathtubBackgroundToggle;
+	// public CGTSpriteToggle washingMachineBackgroundToggle;
 	
+	public Number number = new Number();
+
     void Start()
     {
     	
@@ -162,36 +184,12 @@ public class ItemManager : MonoBehaviour
 		shower.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "SHOWER_PRICE", shower.Price.ToString()));
 		bathtub.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "BATHTUB_PRICE", bathtub.Price.ToString()));
 		washingMachine.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "WASHINGMACHINE_PRICE", washingMachine.Price.ToString()));
+
+		// getint on the toggles, default state -1
     }
 
     public void SetItemData()
     {
-  //   	GameObject duckManager = GameObject.Find("DuckManager");
-		// CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-  //   	ulong baseQps = duckManagerScript.baseQps;
-  //   	int clickValue = duckManagerScript.clickValue;
-
-  //   	powerClick.Price = CalculatePowerClickPrice(powerClick.Level);
-		// toothbrush.Price = CalculateItemPrice(baseQps, clickValue, toothbrush.Qps);
-		// toothpaste.Price = CalculateItemPrice(baseQps, clickValue, toothpaste.Qps);
-		// soap.Price = CalculateItemPrice(baseQps, clickValue, soap.Qps);
-		// sponge.Price = CalculateItemPrice(baseQps, clickValue, sponge.Qps);
-		// deodorant.Price = CalculateItemPrice(baseQps, clickValue, deodorant.Qps);
-		// toiletPaper.Price = CalculateItemPrice(baseQps, clickValue, toiletPaper.Qps);
-		// hairbrush.Price = CalculateItemPrice(baseQps, clickValue, hairbrush.Qps);
-		// toiletBrush.Price = CalculateItemPrice(baseQps, clickValue, toiletBrush.Qps);
-		// plunger.Price = CalculateItemPrice(baseQps, clickValue, plunger.Qps);
-		// scale.Price = CalculateItemPrice(baseQps, clickValue, scale.Qps);
-		// ovalMirror.Price = CalculateItemPrice(baseQps, clickValue, ovalMirror.Qps);
-		// towel.Price = CalculateItemPrice(baseQps, clickValue, towel.Qps);
-		// towelRack.Price = CalculateItemPrice(baseQps, clickValue, towelRack.Qps);
-		// hairDryer.Price = CalculateItemPrice(baseQps, clickValue, hairDryer.Qps);
-		// sink.Price = CalculateItemPrice(baseQps, clickValue, sink.Qps);
-		// toilet.Price = CalculateItemPrice(baseQps, clickValue, toilet.Qps);
-		// shower.Price = CalculateItemPrice(baseQps, clickValue, shower.Qps);
-		// bathtub.Price = CalculateItemPrice(baseQps, clickValue, bathtub.Qps);
-		// washingMachine.Price = CalculateItemPrice(baseQps, clickValue, washingMachine.Qps);
-
 		powerClickLevelText.text = UpdateItemLevel (powerClick.Level);
 		toothbrushLevelText.text = UpdateItemLevel (toothbrush.Level);
 		toothpasteLevelText.text = UpdateItemLevel (toothpaste.Level);
@@ -773,4 +771,81 @@ public class ItemManager : MonoBehaviour
 			duckManagerScript.SaveGameData ();
 		}
 	}
+
+	#region --------------- ITEM TOGGLES FOR GAME BACKGROUND ---------------
+
+	public void ResetItemBackgrounds() {
+
+		// toothbrushBackgroundToggle.SetToggleValue(0);
+		// toothpasteBackgroundToggle.SetToggleValue(0);
+		// soapBackgroundToggle.SetToggleValue(0);
+		// spongeBackgroundToggle.SetToggleValue(0);
+		// deodorantBackgroundToggle.SetToggleValue(0);
+		// toiletPaperBackgroundToggle.SetToggleValue(0);
+		// hairbrushBackgroundToggle.SetToggleValue(0);
+		// toiletBrushBackgroundToggle.SetToggleValue(0);
+		// plungerBackgroundToggle.SetToggleValue(0);
+		// scaleBackgroundToggle.SetToggleValue(0);
+		// ovalMirrorBackgroundToggle.SetToggleValue(0);
+		// towelBackgroundToggle.SetToggleValue(0);
+		// towelRackBackgroundToggle.SetToggleValue(0);
+		// hairDryerBackgroundToggle.SetToggleValue(0);
+		// sinkPriceBackgroundToggle.SetToggleValue(0);
+		// toiletBackgroundToggle.SetToggleValue(0);
+		// showerBackgroundToggle.SetToggleValue(0);
+		// bathtubBackgroundToggle.SetToggleValue(0);
+		// washingMachineBackgroundToggle.SetToggleValue(0);
+		foreach (CGTSpriteToggle backgroundToggle in backgroundToggles)
+			if (backgroundToggle.ToggleState == 1)
+				backgroundToggle.SetToggleValue(0);
+
+		GameObject duckManager = GameObject.Find("DuckManager");
+		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
+		duckManagerScript.spawnDuckObjectsIndex = 0;
+
+	}
+
+	public void ToothbrushBackground()
+	{
+		GameObject duckManager = GameObject.Find("DuckManager");
+		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
+
+		if (toothbrushPriceText.text == "Maxed" && backgroundToggles[0].ToggleState == 0) {
+			
+			ResetItemBackgrounds();
+			backgroundToggles[0].SetToggleValue(1);
+			
+			duckManagerScript.spawnDuckObjectsIndex = 1;
+
+		} else if (toothbrushPriceText.text == "Maxed" && Mathf.Abs(backgroundToggles[0].ToggleState) == 1) {
+
+			backgroundToggles[0].SetToggleValue(0);
+
+			duckManagerScript.spawnDuckObjectsIndex = 0;
+
+		}
+	}
+
+	public void ToothpasteBackground()
+	{
+		GameObject duckManager = GameObject.Find("DuckManager");
+		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
+
+		if (toothpastePriceText.text == "Maxed" && backgroundToggles[1].ToggleState == 0) {
+			
+			ResetItemBackgrounds();
+			backgroundToggles[1].SetToggleValue(1);
+			
+			duckManagerScript.spawnDuckObjectsIndex = 1;
+
+		} else if (toothpastePriceText.text == "Maxed" && Mathf.Abs(backgroundToggles[1].ToggleState) == 1) {
+
+			backgroundToggles[1].SetToggleValue(0);
+
+			duckManagerScript.spawnDuckObjectsIndex = 0;
+
+		}
+	}
+
+	#endregion
 }

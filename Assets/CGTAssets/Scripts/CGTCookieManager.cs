@@ -17,6 +17,7 @@ public class CGTCookieManager : MonoBehaviour {
 
     [Header("Spawn Objects")]
     public GameObject[] spawnDuckObjects;
+    public int spawnDuckObjectsIndex = 0;
     private GameObject spawnSmallDuck;
     public GameObject[] spawnBonusObjects;
     private GameObject spawnBonusDuck;
@@ -323,7 +324,7 @@ public class CGTCookieManager : MonoBehaviour {
     {
         float spawnObjectXPos = Random.Range(-2.0f, 2.0f);
         Vector3 spawnObjectPos = new Vector3(spawnObjectXPos, spawnLine.position.y, 0);
-        spawnSmallDuck = spawnDuckObjects[Random.Range(0, spawnDuckObjects.Length)];
+        spawnSmallDuck = spawnDuckObjects[spawnDuckObjectsIndex];
         GameObject newSmallDuck = (GameObject)(Instantiate(spawnSmallDuck, spawnObjectPos, Quaternion.identity));
 		Destroy (newSmallDuck, 3.0f);
     }
@@ -395,7 +396,7 @@ public class CGTCookieManager : MonoBehaviour {
     {
 		#if UNITY_5_3_OR_NEWER
 	        
-			//PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
+			PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
 			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "0"));
 			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", "10"));
 			levelBonusMulti = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUSMULTI", "1"));
