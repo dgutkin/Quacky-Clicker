@@ -8,277 +8,102 @@ public class ItemManager : MonoBehaviour
 {
 
 	[Header("Items")]
-	// items, item texts and toggles all need to be arrays
-	public Item powerClick = new Item(0, 25, 1, 0, "PowerClick");
-	public Item toothbrush = new Item(0, 10, 1, 1, "Toothbrush");
-	public Item toothpaste = new Item (0, 10, 1, 2, "Toothpaste");
-	public Item soap = new Item(0, 10, 1, 5, "Soap");
-	public Item sponge = new Item (0, 10, 1, 10, "Sponge");
-	public Item deodorant = new Item (0, 10, 1, 20, "Deodorant");
-	public Item toiletPaper = new Item (0, 10, 1, 50, "ToiletPaper");
-	public Item hairbrush = new Item (0, 10, 1, 100, "HairBrush");
-	public Item toiletBrush = new Item (0, 10, 1, 500, "ToiletBrush");
-	public Item plunger = new Item (0, 10, 1, 1000, "Plunger");
-	public Item scale = new Item (0, 10, 1, 5000, "Scale");
-	public Item ovalMirror = new Item (0, 10, 1, 10000, "OvalMirror");
-	public Item towel = new Item (0, 10, 1, 50000, "Towel");
-	public Item towelRack = new Item (0, 10, 1, 100000, "TowelRack");
-	public Item hairDryer = new Item (0, 10, 1, 500000, "HairDryer");
-	public Item sink = new Item (0, 10, 1, 1000000, "Sink");
-	public Item toilet = new Item (0, 10, 1, 5000000, "Toilet");
-	public Item shower = new Item (0, 10, 1, 10000000, "Shower");
-	public Item bathtub = new Item (0, 10, 1, 50000000, "Bathtub");
-	public Item washingMachine = new Item (0, 10, 1, 100000000, "WashingMachine");
+
+	static int itemCount = 20;
+	public Item[] items = new Item[itemCount];
 
 	[Header("Item Texts")]
 
 	public Text quackCountText;
 
-	public Text powerClickLevelText;
-	public Text toothbrushLevelText;
-	public Text toothpasteLevelText;
-	public Text soapLevelText;
-	public Text spongeLevelText;
-	public Text deodorantLevelText;
-	public Text toiletPaperLevelText;
-	public Text hairbrushLevelText;
-	public Text toiletBrushLevelText;
-	public Text plungerLevelText;
-	public Text scaleLevelText;
-	public Text ovalMirrorLevelText;
-	public Text towelLevelText;
-	public Text towelRackLevelText;
-	public Text hairDryerLevelText;
-	public Text sinkLevelText;
-	public Text toiletLevelText;
-	public Text showerLevelText;
-	public Text bathtubLevelText;
-	public Text washingMachineLevelText;
+	public Text[] itemLevelTexts;
 
-	public Text powerClickPriceText;
-	public Text toothbrushPriceText;
-	public Text toothpastePriceText;
-	public Text soapPriceText;
-	public Text spongePriceText;
-	public Text deodorantPriceText;
-	public Text toiletPaperPriceText;
-	public Text hairbrushPriceText;
-	public Text toiletBrushPriceText;
-	public Text plungerPriceText;
-	public Text scalePriceText;
-	public Text ovalMirrorPriceText;
-	public Text towelPriceText;
-	public Text towelRackPriceText;
-	public Text hairDryerPriceText;
-	public Text sinkPriceText;
-	public Text toiletPriceText;
-	public Text showerPriceText;
-	public Text bathtubPriceText;
-	public Text washingMachinePriceText;
+	public Text[] itemPriceTexts;
 
 	[Header("Sounds")]
+
 	public AudioClip[] gameBonusClickSound;
 
 	[Header("Background Toggles")]
+
 	public CGTSpriteToggle[] backgroundToggles;
-	// public CGTSpriteToggle toothbrushBackgroundToggle;
-	// public CGTSpriteToggle toothpasteBackgroundToggle;
-	// public CGTSpriteToggle soapBackgroundToggle;
-	// public CGTSpriteToggle spongeBackgroundToggle;
-	// public CGTSpriteToggle deodorantBackgroundToggle;
-	// public CGTSpriteToggle toiletPaperBackgroundToggle;
-	// public CGTSpriteToggle hairbrushBackgroundToggle;
-	// public CGTSpriteToggle toiletBrushBackgroundToggle;
-	// public CGTSpriteToggle plungerBackgroundToggle;
-	// public CGTSpriteToggle scaleBackgroundToggle;
-	// public CGTSpriteToggle ovalMirrorBackgroundToggle;
-	// public CGTSpriteToggle towelBackgroundToggle;
-	// public CGTSpriteToggle towelRackBackgroundToggle;
-	// public CGTSpriteToggle hairDryerBackgroundToggle;
-	// public CGTSpriteToggle sinkPriceBackgroundToggle;
-	// public CGTSpriteToggle toiletBackgroundToggle;
-	// public CGTSpriteToggle showerBackgroundToggle;
-	// public CGTSpriteToggle bathtubBackgroundToggle;
-	// public CGTSpriteToggle washingMachineBackgroundToggle;
 	
 	public Number number = new Number();
-
-    void Start()
-    {
-    	
-    }
-
-    void Update()
-    {
-        
-    }
 
     #region --------------- ITEM DATA ---------------
 
     public void LoadItemData()
     {
-    	powerClick.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "POWERCLICK_LEVEL", 0);
-		toothbrush.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "TOOTHBRUSH_LEVEL", 0);
-		toothpaste.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "TOOTHPASTE_LEVEL", 0);
-		soap.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "SOAP_LEVEL", 0);
-		sponge.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "SPONGE_LEVEL", 0);
-		deodorant.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "DEODORANT_LEVEL", 0);
-		toiletPaper.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "TOILETPAPER_LEVEL", 0);
-		hairbrush.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "HAIRBRUSH_LEVEL", 0);
-		toiletBrush.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "TOILETBRUSH_LEVEL", 0);
-		plunger.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "PLUNGER_LEVEL", 0);
-		scale.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "SCALE_LEVEL", 0);
-		ovalMirror.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "OVALMIRROR_LEVEL", 0);
-		towel.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "TOWEL_LEVEL", 0);
-		towelRack.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "TOWELRACK_LEVEL", 0);
-		hairDryer.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "HAIRDRYER_LEVEL", 0);
-		sink.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "SINK_LEVEL", 0);
-		toilet.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "TOILET_LEVEL", 0);
-		shower.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "SHOWER_LEVEL", 0);
-		bathtub.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "BATHTUB_LEVEL", 0);
-		washingMachine.Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "WASHINGMACHINE_LEVEL", 0);
+
+    	items[0] = new Item(0, 25, 1, 0, "POWERCLICK");
+		items[1] = new Item(0, 10, 1, 1, "TOOTHBRUSH");
+		items[2] = new Item (0, 10, 1, 2, "TOOTHPASTE");
+		items[3] = new Item(0, 10, 1, 5, "SOAP");
+		items[4] = new Item (0, 10, 1, 10, "SPONGE");
+		items[5] = new Item (0, 10, 1, 20, "DEODORANT");
+		items[6] = new Item (0, 10, 1, 50, "TOILETPAPER");
+		items[7] = new Item (0, 10, 1, 100, "HAIRBRUSH");
+		items[8] = new Item (0, 10, 1, 500, "TOILETBRUSH");
+		items[9] = new Item (0, 10, 1, 1000, "PLUNGER");
+		items[10] = new Item (0, 10, 1, 5000, "SCALE");
+		items[11] = new Item (0, 10, 1, 10000, "OVALMIRROR");
+		items[12] = new Item (0, 10, 1, 50000, "TOWEL");
+		items[13] = new Item (0, 10, 1, 100000, "TOWELRACK");
+		items[14] = new Item (0, 10, 1, 500000, "HAIRDRYER");
+		items[15] = new Item (0, 10, 1, 1000000, "SINK");
+		items[16] = new Item (0, 10, 1, 5000000, "TOILET");
+		items[17] = new Item (0, 10, 1, 10000000, "SHOWER");
+		items[18] = new Item (0, 10, 1, 50000000, "BATHTUB");
+		items[19] = new Item (0, 10, 1, 100000000, "WASHINGMACHINE");
 
 		GameObject duckManager = GameObject.Find("DuckManager");
 		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
     	ulong baseQps = duckManagerScript.baseQps;
     	int clickValue = duckManagerScript.clickValue;
 
-    	powerClick.Price = CalculatePowerClickPrice(powerClick.Level);
-		toothbrush.Price = CalculateItemPrice(baseQps, clickValue, toothbrush.Qps);
-		toothpaste.Price = CalculateItemPrice(baseQps, clickValue, toothpaste.Qps);
-		soap.Price = CalculateItemPrice(baseQps, clickValue, soap.Qps);
-		sponge.Price = CalculateItemPrice(baseQps, clickValue, sponge.Qps);
-		deodorant.Price = CalculateItemPrice(baseQps, clickValue, deodorant.Qps);
-		toiletPaper.Price = CalculateItemPrice(baseQps, clickValue, toiletPaper.Qps);
-		hairbrush.Price = CalculateItemPrice(baseQps, clickValue, hairbrush.Qps);
-		toiletBrush.Price = CalculateItemPrice(baseQps, clickValue, toiletBrush.Qps);
-		plunger.Price = CalculateItemPrice(baseQps, clickValue, plunger.Qps);
-		scale.Price = CalculateItemPrice(baseQps, clickValue, scale.Qps);
-		ovalMirror.Price = CalculateItemPrice(baseQps, clickValue, ovalMirror.Qps);
-		towel.Price = CalculateItemPrice(baseQps, clickValue, towel.Qps);
-		towelRack.Price = CalculateItemPrice(baseQps, clickValue, towelRack.Qps);
-		hairDryer.Price = CalculateItemPrice(baseQps, clickValue, hairDryer.Qps);
-		sink.Price = CalculateItemPrice(baseQps, clickValue, sink.Qps);
-		toilet.Price = CalculateItemPrice(baseQps, clickValue, toilet.Qps);
-		shower.Price = CalculateItemPrice(baseQps, clickValue, shower.Qps);
-		bathtub.Price = CalculateItemPrice(baseQps, clickValue, bathtub.Qps);
-		washingMachine.Price = CalculateItemPrice(baseQps, clickValue, washingMachine.Qps);
-
-		powerClick.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "POWERCLICK_PRICE", powerClick.Price.ToString()));
-		toothbrush.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOOTHBRUSH_PRICE", toothbrush.Price.ToString()));
-		toothpaste.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOOTHPASTE_PRICE", toothpaste.Price.ToString()));
-		soap.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "SOAP_PRICE", soap.Price.ToString()));
-		sponge.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "SPONGE_PRICE", sponge.Price.ToString()));
-		deodorant.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "DEODORANT_PRICE", deodorant.Price.ToString()));
-		toiletPaper.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOILETPAPER_PRICE", toiletPaper.Price.ToString()));
-		hairbrush.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "HAIRBRUSH_PRICE", hairbrush.Price.ToString()));
-		toiletBrush.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOILETBRUSH_PRICE", toiletBrush.Price.ToString()));
-		plunger.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "PLUNGER_PRICE", plunger.Price.ToString()));
-		scale.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "SCALE_PRICE", scale.Price.ToString()));
-		ovalMirror.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "OVALMIRROR_PRICE", ovalMirror.Price.ToString()));
-		towel.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOWEL_PRICE", towel.Price.ToString()));
-		towelRack.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOWELRACK_PRICE", towelRack.Price.ToString()));
-		hairDryer.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "HAIRDRYER_PRICE", hairDryer.Price.ToString()));
-		sink.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "SINK_PRICE", sink.Price.ToString()));
-		toilet.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "TOILET_PRICE", toilet.Price.ToString()));
-		shower.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "SHOWER_PRICE", shower.Price.ToString()));
-		bathtub.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "BATHTUB_PRICE", bathtub.Price.ToString()));
-		washingMachine.Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "WASHINGMACHINE_PRICE", washingMachine.Price.ToString()));
-
-		// getint on the toggles, default state -1
+  
+		for (int i = 0; i < itemCount; i++) 
+		{
+			items[i].Level = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + items[i].Name + "_LEVEL", 0);
+			if (i == 0) {
+				items[i].Price = CalculatePowerClickPrice(items[i].Level);
+			} else {
+				items[i].Price = CalculateItemPrice(baseQps, clickValue, items[i].Qps);
+				backgroundToggles[i-1].ToggleState = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + items[i].Name + "_TOGGLESTATE", -1);
+				if (backgroundToggles[i-1].ToggleState == 1)
+					duckManagerScript.spawnDuckObjectsIndex = i;
+			}
+			items[i].Price = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + items[i].Name + "_PRICE", items[i].Price.ToString()));
+		}
     }
 
     public void SetItemData()
     {
-		powerClickLevelText.text = UpdateItemLevel (powerClick.Level);
-		toothbrushLevelText.text = UpdateItemLevel (toothbrush.Level);
-		toothpasteLevelText.text = UpdateItemLevel (toothpaste.Level);
-		soapLevelText.text = UpdateItemLevel (soap.Level);
-		spongeLevelText.text = UpdateItemLevel (sponge.Level);
-		deodorantLevelText.text = UpdateItemLevel (deodorant.Level);
-		toiletPaperLevelText.text = UpdateItemLevel (toiletPaper.Level);
-		hairbrushLevelText.text = UpdateItemLevel (hairbrush.Level);
-		toiletBrushLevelText.text = UpdateItemLevel (toiletBrush.Level);
-		plungerLevelText.text = UpdateItemLevel (plunger.Level);
-		scaleLevelText.text = UpdateItemLevel (scale.Level);
-		ovalMirrorLevelText.text = UpdateItemLevel (ovalMirror.Level);
-		towelLevelText.text = UpdateItemLevel (towel.Level);
-		towelRackLevelText.text = UpdateItemLevel (towelRack.Level);
-		hairDryerLevelText.text = UpdateItemLevel (hairDryer.Level);
-		sinkLevelText.text = UpdateItemLevel (sink.Level);
-		toiletLevelText.text = UpdateItemLevel (toilet.Level);
-		showerLevelText.text = UpdateItemLevel (shower.Level);
-		bathtubLevelText.text = UpdateItemLevel (bathtub.Level);
-		washingMachineLevelText.text = UpdateItemLevel (washingMachine.Level);
-
-		powerClickPriceText.text = "Cost: " + UpdateItemPrice(powerClick.Level, powerClick.LevelCount, powerClick.Price);
-		toothbrushPriceText.text = UpdateItemPrice(toothbrush.Level, toothbrush.LevelCount, toothbrush.Price);
-		toothpastePriceText.text = UpdateItemPrice(toothpaste.Level, toothpaste.LevelCount, toothpaste.Price);
-		soapPriceText.text = UpdateItemPrice(soap.Level, soap.LevelCount, soap.Price);
-		spongePriceText.text = UpdateItemPrice(sponge.Level, sponge.LevelCount, sponge.Price);
-		deodorantPriceText.text = UpdateItemPrice(deodorant.Level, deodorant.LevelCount, deodorant.Price);
-		toiletPaperPriceText.text = UpdateItemPrice(toiletPaper.Level, toiletPaper.LevelCount, toiletPaper.Price);
-		hairbrushPriceText.text = UpdateItemPrice(hairbrush.Level, hairbrush.LevelCount, hairbrush.Price);
-		toiletBrushPriceText.text = UpdateItemPrice(toiletBrush.Level, toiletBrush.LevelCount, toiletBrush.Price);
-		plungerPriceText.text = UpdateItemPrice(plunger.Level, plunger.LevelCount, plunger.Price);
-		scalePriceText.text = UpdateItemPrice(scale.Level, scale.LevelCount, scale.Price);
-		ovalMirrorPriceText.text = UpdateItemPrice(ovalMirror.Level, ovalMirror.LevelCount, ovalMirror.Price);
-		towelPriceText.text = UpdateItemPrice(towel.Level, towel.LevelCount, towel.Price);
-		towelRackPriceText.text = UpdateItemPrice(towelRack.Level, towelRack.LevelCount, towelRack.Price);
-		hairDryerPriceText.text = UpdateItemPrice(hairDryer.Level, hairDryer.LevelCount, hairDryer.Price);
-		sinkPriceText.text = UpdateItemPrice(sink.Level, sink.LevelCount, sink.Price);
-		toiletPriceText.text = UpdateItemPrice(toilet.Level, toilet.LevelCount, toilet.Price);
-		showerPriceText.text = UpdateItemPrice(shower.Level, shower.LevelCount, shower.Price);
-		bathtubPriceText.text = UpdateItemPrice(bathtub.Level, bathtub.LevelCount, bathtub.Price);
-		washingMachinePriceText.text = UpdateItemPrice(washingMachine.Level, washingMachine.LevelCount, washingMachine.Price);
+		for (int i = 0; i < itemCount; i++)
+		{
+			itemLevelTexts[i].text = UpdateItemLevel(items[i].Level);
+			if (i == 0){
+				itemPriceTexts[i].text = "Cost: " + UpdateItemPrice(items[i].Level, items[i].LevelCount, items[i].Price);
+			} else {
+				itemPriceTexts[i].text = UpdateItemPrice(items[i].Level, items[i].LevelCount, items[i].Price);		
+			}
+		}
     }
 
     public void SaveItemData()
     {
-    	PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "POWERCLICK_LEVEL", powerClick.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "TOOTHBRUSH_LEVEL", toothbrush.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "TOOTHPASTE_LEVEL", toothpaste.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "SOAP_LEVEL", soap.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "SPONGE_LEVEL", sponge.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "DEODORANT_LEVEL", deodorant.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "TOILETPAPER_LEVEL", toiletPaper.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "HAIRBRUSH_LEVEL", hairbrush.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "TOILETBRUSH_LEVEL", toiletBrush.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "PLUNGER_LEVEL", plunger.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "SCALE_LEVEL", scale.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "OVALMIRROR_LEVEL", ovalMirror.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "TOWEL_LEVEL", towel.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "TOWELRACK_LEVEL", towelRack.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "HAIRDRYER_LEVEL", hairDryer.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "SINK_LEVEL", sink.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "TOILET_LEVEL", toilet.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "SHOWER_LEVEL", shower.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "BATHTUB_LEVEL", bathtub.Level);
-		PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "WASHINGMACHINE_LEVEL", washingMachine.Level);
-
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "POWERCLICK_PRICE", powerClick.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOOTHBRUSH_PRICE", toothbrush.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOOTHPASTE_PRICE", toothpaste.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "SOAP_PRICE", soap.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "SPONGE_PRICE", sponge.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "DEODORANT_PRICE", deodorant.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOILETPAPER_PRICE", toiletPaper.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "HAIRBRUSH_PRICE", hairbrush.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOILETBRUSH_PRICE", toiletBrush.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "PLUNGER_PRICE", plunger.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "SCALE_PRICE", scale.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "OVALMIRROR_PRICE", ovalMirror.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOWEL_PRICE", towel.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOWELRACK_PRICE", towelRack.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "HAIRDRYER_PRICE", hairDryer.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "SINK_PRICE", sink.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "TOILET_PRICE", toilet.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "SHOWER_PRICE", shower.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "BATHTUB_PRICE", bathtub.Price.ToString());
-		PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "WASHINGMACHINE_PRICE", washingMachine.Price.ToString());
+		for (int i = 0; i < itemCount; i++) 
+		{
+			PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + items[i].Name + "_LEVEL", items[i].Level);
+			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + items[i].Name + "_PRICE", items[i].Price.ToString());
+			if (i > 0)
+				PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + items[i].Name + "_TOGGLESTATE", backgroundToggles[i-1].ToggleState);
+		}
     }
 
     #endregion
+
+    #region --------------- ITEM UPGRADES ---------------
 
     public void UpdateQuacksText(ulong quackScore)
 	{
@@ -299,14 +124,13 @@ public class ItemManager : MonoBehaviour
 		return number.RoundLargeNumber(itemPrice);
 	}
 
-	public string UpdateItemLevel(int itemLevel){
-
+	public string UpdateItemLevel(int itemLevel)
+	{
 		return itemLevel.ToString();
-
 	}
 
-	public string UpdateItemPrice(int itemLevel, int itemLevelCount, ulong itemPrice){
-
+	public string UpdateItemPrice(int itemLevel, int itemLevelCount, ulong itemPrice)
+	{
 		if (itemLevel == itemLevelCount) {
 
 			return "Maxed";
@@ -315,11 +139,10 @@ public class ItemManager : MonoBehaviour
 
 			return number.FormatLargeNumber(itemPrice) + " quacks";
 		}
-
 	}
 
-	public bool BuyQualify(int itemLevel, int itemLevelCount, ulong itemPrice, ulong quackScore){
-
+	public bool BuyQualify(int itemLevel, int itemLevelCount, ulong itemPrice, ulong quackScore)
+	{
 		if ((itemLevel < itemLevelCount) && (quackScore >= itemPrice)) {
 			
 			return true;
@@ -332,17 +155,15 @@ public class ItemManager : MonoBehaviour
 			return false;
 
 		}
-
 	}
 
-	public void BuyItem(ulong itemPrice, int itemLevel){
-
+	public void BuyItem(ulong itemPrice, int itemLevel)
+	{
 		GameObject duckManager = GameObject.Find("DuckManager");
 		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
 		duckManagerScript.PlaySound (gameBonusClickSound [Random.Range (0, gameBonusClickSound.Length)]);
 		duckManagerScript.quackScore = duckManagerScript.quackScore - itemPrice;
 		UpdateQuacksText(duckManagerScript.quackScore);
-
 	}
 
 	public void PowerClickUpgrade()
@@ -350,15 +171,15 @@ public class ItemManager : MonoBehaviour
 		GameObject duckManager = GameObject.Find("DuckManager");
 		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
 
-		if (BuyQualify (powerClick.Level, powerClick.LevelCount, powerClick.Price, duckManagerScript.quackScore)) {
+		if (BuyQualify (items[0].Level, items[0].LevelCount, items[0].Price, duckManagerScript.quackScore)) {
 
-			BuyItem (powerClick.Price, powerClick.Level);
-			powerClick.Level++;
-			powerClick.Price = CalculatePowerClickPrice(powerClick.Level);
+			BuyItem (items[0].Price, items[0].Level);
+			items[0].Level++;
+			items[0].Price = CalculatePowerClickPrice(items[0].Level);
 			duckManagerScript.clickValue *= 2; // double the click value
 
-			powerClickLevelText.text = UpdateItemLevel (powerClick.Level);
-			powerClickPriceText.text = "Cost: " + UpdateItemPrice (powerClick.Level, powerClick.LevelCount, powerClick.Price);
+			itemLevelTexts[0].text = UpdateItemLevel (items[0].Level);
+			itemPriceTexts[0].text = "Cost: " + UpdateItemPrice (items[0].Level, items[0].LevelCount, items[0].Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -367,47 +188,23 @@ public class ItemManager : MonoBehaviour
 
 	}
 
-	public void ToothbrushUpgrade()
+	public void ItemUpgrade(int itemIndex)
 	{
 		GameObject duckManager = GameObject.Find("DuckManager");
 		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
 		
-		if (BuyQualify (toothbrush.Level, toothbrush.LevelCount, toothbrush.Price, duckManagerScript.quackScore)) {
+		if (BuyQualify (items[itemIndex].Level, items[itemIndex].LevelCount, items[itemIndex].Price, duckManagerScript.quackScore)) {
 
-			BuyItem (toothbrush.Price, toothbrush.Level);
-			toothbrush.Level++;
-			duckManagerScript.baseQps += (ulong) toothbrush.Qps;
-			ulong newPrice = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toothbrush.Qps);
-			if (newPrice == toothbrush.Price)
+			BuyItem (items[itemIndex].Price, items[itemIndex].Level);
+			items[itemIndex].Level++;
+			duckManagerScript.baseQps += (ulong) items[itemIndex].Qps;
+			ulong newPrice = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, items[itemIndex].Qps);
+			if (newPrice == items[itemIndex].Price)
 				newPrice = number.IncrementLargeNumber(newPrice, 1);
-			toothbrush.Price = newPrice;
+			items[itemIndex].Price = newPrice;
 
-			toothbrushLevelText.text = UpdateItemLevel (toothbrush.Level);
-			toothbrushPriceText.text = UpdateItemPrice (toothbrush.Level, toothbrush.LevelCount, toothbrush.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void ToothpasteUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (toothpaste.Level, toothpaste.LevelCount, toothpaste.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (toothpaste.Price, toothpaste.Level);
-			toothpaste.Level++;
-			duckManagerScript.baseQps += (ulong) toothpaste.Qps;
-			ulong newPrice = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toothbrush.Qps);
-			if (newPrice == toothpaste.Price)
-				newPrice = number.IncrementLargeNumber(newPrice, 1);
-			toothpaste.Price = newPrice;
-
-			toothpasteLevelText.text = UpdateItemLevel (toothpaste.Level);
-			toothpastePriceText.text = UpdateItemPrice (toothpaste.Level, toothpaste.LevelCount, toothpaste.Price);
+			itemLevelTexts[itemIndex].text = UpdateItemLevel (items[itemIndex].Level);
+			itemPriceTexts[itemIndex].text = UpdateItemPrice (items[itemIndex].Level, items[itemIndex].LevelCount, items[itemIndex].Price);
 
 			SaveItemData();
 			duckManagerScript.UpdateGameData ();
@@ -415,386 +212,12 @@ public class ItemManager : MonoBehaviour
 		}
 	}
 
-	public void SoapUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (soap.Level, soap.LevelCount, soap.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (soap.Price, soap.Level);
-			soap.Level++;
-			duckManagerScript.baseQps += (ulong) soap.Qps;
-			soap.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, soap.Qps);
-
-			soapLevelText.text = UpdateItemLevel (soap.Level);
-			soapPriceText.text = UpdateItemPrice (soap.Level, soap.LevelCount, soap.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void SpongeUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (sponge.Level, sponge.LevelCount, sponge.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (sponge.Price, sponge.Level);
-			sponge.Level++;
-			duckManagerScript.baseQps += (ulong) sponge.Qps;
-			sponge.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, sponge.Qps);
-
-			spongeLevelText.text = UpdateItemLevel (sponge.Level);
-			spongePriceText.text = UpdateItemPrice (sponge.Level, sponge.LevelCount, sponge.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void DeodorantUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (deodorant.Level, deodorant.LevelCount, deodorant.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (deodorant.Price, deodorant.Level);
-			deodorant.Level++;
-			duckManagerScript.baseQps += (ulong) deodorant.Qps;
-			deodorant.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, deodorant.Qps);
-
-			deodorantLevelText.text = UpdateItemLevel (deodorant.Level);
-			deodorantPriceText.text = UpdateItemPrice (deodorant.Level, deodorant.LevelCount, deodorant.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void ToiletPaperUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (toiletPaper.Level, toiletPaper.LevelCount, toiletPaper.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (toiletPaper.Price, toiletPaper.Level);
-			toiletPaper.Level++;
-			duckManagerScript.baseQps += (ulong) toiletPaper.Qps;
-			toiletPaper.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toiletPaper.Qps);
-
-			toiletPaperLevelText.text = UpdateItemLevel (toiletPaper.Level);
-			toiletPaperPriceText.text = UpdateItemPrice (toiletPaper.Level, toiletPaper.LevelCount, toiletPaper.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void HairbrushUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (hairbrush.Level, hairbrush.LevelCount, hairbrush.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (hairbrush.Price, hairbrush.Level);
-			hairbrush.Level++;
-			duckManagerScript.baseQps += (ulong) hairbrush.Qps;
-			hairbrush.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, hairbrush.Qps);
-
-			hairbrushLevelText.text = UpdateItemLevel (hairbrush.Level);
-			hairbrushPriceText.text = UpdateItemPrice (hairbrush.Level, hairbrush.LevelCount, hairbrush.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void ToiletBrushUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (toiletBrush.Level, toiletBrush.LevelCount, toiletBrush.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (toiletBrush.Price, toiletBrush.Level);
-			toiletBrush.Level++;
-			duckManagerScript.baseQps += (ulong) toiletBrush.Qps;
-			toiletBrush.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toiletBrush.Qps);
-
-			toiletBrushLevelText.text = UpdateItemLevel (toiletBrush.Level);
-			toiletBrushPriceText.text = UpdateItemPrice (toiletBrush.Level, toiletBrush.LevelCount, toiletBrush.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void PlungerUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (plunger.Level, plunger.LevelCount, plunger.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (plunger.Price, plunger.Level);
-			plunger.Level++;
-			duckManagerScript.baseQps += (ulong) plunger.Qps;
-			plunger.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, plunger.Qps);
-
-			plungerLevelText.text = UpdateItemLevel (plunger.Level);
-			plungerPriceText.text = UpdateItemPrice (plunger.Level, plunger.LevelCount, plunger.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void ScaleUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (scale.Level, scale.LevelCount, scale.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (scale.Price, scale.Level);
-			scale.Level++;
-			duckManagerScript.baseQps += (ulong) scale.Qps;
-			scale.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, scale.Qps);
-
-			scaleLevelText.text = UpdateItemLevel (scale.Level);
-			scalePriceText.text = UpdateItemPrice (scale.Level, scale.LevelCount, scale.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void OvalMirrorUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (ovalMirror.Level, ovalMirror.LevelCount, ovalMirror.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (ovalMirror.Price, ovalMirror.Level);
-			ovalMirror.Level++;
-			duckManagerScript.baseQps += (ulong) ovalMirror.Qps;
-			ovalMirror.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, ovalMirror.Qps);
-
-			ovalMirrorLevelText.text = UpdateItemLevel (ovalMirror.Level);
-			ovalMirrorPriceText.text = UpdateItemPrice (ovalMirror.Level, ovalMirror.LevelCount, ovalMirror.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void TowelUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (towel.Level, towel.LevelCount, towel.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (towel.Price, towel.Level);
-			towel.Level++;
-			duckManagerScript.baseQps += (ulong) towel.Qps;
-			towel.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, towel.Qps);
-
-			towelLevelText.text = UpdateItemLevel (towel.Level);
-			towelPriceText.text = UpdateItemPrice (towel.Level, towel.LevelCount, towel.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void TowelRackUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (towelRack.Level, towelRack.LevelCount, towelRack.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (towelRack.Price, towelRack.Level);
-			towelRack.Level++;
-			duckManagerScript.baseQps += (ulong) towelRack.Qps;
-			towelRack.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, towelRack.Qps);
-
-			towelRackLevelText.text = UpdateItemLevel (towelRack.Level);
-			towelRackPriceText.text = UpdateItemPrice (towelRack.Level, towelRack.LevelCount, towelRack.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void HairDryerUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (hairDryer.Level, hairDryer.LevelCount, hairDryer.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (hairDryer.Price, hairDryer.Level);
-			hairDryer.Level++;
-			duckManagerScript.baseQps += (ulong) hairDryer.Qps;
-			hairDryer.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, hairDryer.Qps);
-
-			hairDryerLevelText.text = UpdateItemLevel (hairDryer.Level);
-			hairDryerPriceText.text = UpdateItemPrice (hairDryer.Level, hairDryer.LevelCount, hairDryer.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void SinkUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (sink.Level, sink.LevelCount, sink.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (sink.Price, sink.Level);
-			sink.Level++;
-			duckManagerScript.baseQps += (ulong) sink.Qps;
-			sink.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, sink.Qps);
-
-			sinkLevelText.text = UpdateItemLevel (sink.Level);
-			sinkPriceText.text = UpdateItemPrice (sink.Level, sink.LevelCount, sink.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void ToiletUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (toilet.Level, toilet.LevelCount, toilet.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (toilet.Price, toilet.Level);
-			toilet.Level++;
-			duckManagerScript.baseQps += (ulong) toilet.Qps;
-			toilet.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, toilet.Qps);
-
-			toiletLevelText.text = UpdateItemLevel (toilet.Level);
-			toiletPriceText.text = UpdateItemPrice (toilet.Level, toilet.LevelCount, toilet.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void ShowerUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (shower.Level, shower.LevelCount, shower.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (shower.Price, shower.Level);
-			shower.Level++;
-			duckManagerScript.baseQps += (ulong) shower.Qps;
-			shower.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, shower.Qps);
-
-			showerLevelText.text = UpdateItemLevel (shower.Level);
-			showerPriceText.text = UpdateItemPrice (shower.Level, shower.LevelCount, shower.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void BathtubUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (bathtub.Level, bathtub.LevelCount, bathtub.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (bathtub.Price, bathtub.Level);
-			bathtub.Level++;
-			duckManagerScript.baseQps += (ulong) bathtub.Qps;
-			bathtub.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, bathtub.Qps);
-
-			bathtubLevelText.text = UpdateItemLevel (bathtub.Level);
-			bathtubPriceText.text = UpdateItemPrice (bathtub.Level, bathtub.LevelCount, bathtub.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
-
-	public void WashingMachineUpgrade()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-		
-		if (BuyQualify (washingMachine.Level, washingMachine.LevelCount, washingMachine.Price, duckManagerScript.quackScore)) {
-
-			BuyItem (washingMachine.Price, washingMachine.Level);
-			washingMachine.Level++;
-			duckManagerScript.baseQps += (ulong) washingMachine.Qps;
-			washingMachine.Price = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, washingMachine.Qps);
-
-			washingMachineLevelText.text = UpdateItemLevel (washingMachine.Level);
-			washingMachinePriceText.text = UpdateItemPrice (washingMachine.Level, washingMachine.LevelCount, washingMachine.Price);
-
-			SaveItemData();
-			duckManagerScript.UpdateGameData ();
-			duckManagerScript.SaveGameData ();
-		}
-	}
+	#endregion
 
 	#region --------------- ITEM TOGGLES FOR GAME BACKGROUND ---------------
 
-	public void ResetItemBackgrounds() {
-
-		// toothbrushBackgroundToggle.SetToggleValue(0);
-		// toothpasteBackgroundToggle.SetToggleValue(0);
-		// soapBackgroundToggle.SetToggleValue(0);
-		// spongeBackgroundToggle.SetToggleValue(0);
-		// deodorantBackgroundToggle.SetToggleValue(0);
-		// toiletPaperBackgroundToggle.SetToggleValue(0);
-		// hairbrushBackgroundToggle.SetToggleValue(0);
-		// toiletBrushBackgroundToggle.SetToggleValue(0);
-		// plungerBackgroundToggle.SetToggleValue(0);
-		// scaleBackgroundToggle.SetToggleValue(0);
-		// ovalMirrorBackgroundToggle.SetToggleValue(0);
-		// towelBackgroundToggle.SetToggleValue(0);
-		// towelRackBackgroundToggle.SetToggleValue(0);
-		// hairDryerBackgroundToggle.SetToggleValue(0);
-		// sinkPriceBackgroundToggle.SetToggleValue(0);
-		// toiletBackgroundToggle.SetToggleValue(0);
-		// showerBackgroundToggle.SetToggleValue(0);
-		// bathtubBackgroundToggle.SetToggleValue(0);
-		// washingMachineBackgroundToggle.SetToggleValue(0);
+	public void ResetItemBackgrounds() 
+	{
 		foreach (CGTSpriteToggle backgroundToggle in backgroundToggles)
 			if (backgroundToggle.ToggleState == 1)
 				backgroundToggle.SetToggleValue(0);
@@ -802,47 +225,29 @@ public class ItemManager : MonoBehaviour
 		GameObject duckManager = GameObject.Find("DuckManager");
 		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
 		duckManagerScript.spawnDuckObjectsIndex = 0;
-
 	}
 
-	public void ToothbrushBackground()
+	public void ItemBackground(int itemIndex)
 	{
 		GameObject duckManager = GameObject.Find("DuckManager");
 		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-
-		if (toothbrushPriceText.text == "Maxed" && backgroundToggles[0].ToggleState == 0) {
+		Debug.Log(backgroundToggles[itemIndex - 1].ToggleState.ToString());
+		if (itemPriceTexts[itemIndex].text == "Maxed" && backgroundToggles[itemIndex - 1].ToggleState == 0) {
 			
 			ResetItemBackgrounds();
-			backgroundToggles[0].SetToggleValue(1);
+			backgroundToggles[itemIndex - 1].SetToggleValue(1);
 			
-			duckManagerScript.spawnDuckObjectsIndex = 1;
+			duckManagerScript.spawnDuckObjectsIndex = itemIndex;
 
-		} else if (toothbrushPriceText.text == "Maxed" && Mathf.Abs(backgroundToggles[0].ToggleState) == 1) {
+		} else if (itemPriceTexts[itemIndex].text == "Maxed" && backgroundToggles[itemIndex - 1].ToggleState == 1) {
 
-			backgroundToggles[0].SetToggleValue(0);
+			backgroundToggles[itemIndex - 1].SetToggleValue(0);
 
 			duckManagerScript.spawnDuckObjectsIndex = 0;
 
-		}
-	}
+		} else if (itemPriceTexts[itemIndex].text == "Maxed" && backgroundToggles[itemIndex - 1].ToggleState == -1) {
 
-	public void ToothpasteBackground()
-	{
-		GameObject duckManager = GameObject.Find("DuckManager");
-		CGTCookieManager duckManagerScript = duckManager.GetComponent<CGTCookieManager>();
-
-		if (toothpastePriceText.text == "Maxed" && backgroundToggles[1].ToggleState == 0) {
-			
-			ResetItemBackgrounds();
-			backgroundToggles[1].SetToggleValue(1);
-			
-			duckManagerScript.spawnDuckObjectsIndex = 1;
-
-		} else if (toothpastePriceText.text == "Maxed" && Mathf.Abs(backgroundToggles[1].ToggleState) == 1) {
-
-			backgroundToggles[1].SetToggleValue(0);
-
-			duckManagerScript.spawnDuckObjectsIndex = 0;
+			backgroundToggles[itemIndex - 1].SetToggleValue(0);
 
 		}
 	}
