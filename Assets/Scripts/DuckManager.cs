@@ -163,7 +163,7 @@ public class DuckManager : MonoBehaviour {
 				if (rand == 1)
 				{
 					multiplierOn = true;
-				} else if (rand == 2 || rand == 3) {
+				} else if (rand == 2 || rand > 3) {
 					
 					StartCoroutine(CreateBonusDuck(1, 1));
 
@@ -258,6 +258,7 @@ public class DuckManager : MonoBehaviour {
                 CreateSmallDuck();
                 animator.SetBool("Tap", true);
                 UpdateScore(clickValue * clickMultiplier);
+                CreateTextScore(clickValue * clickMultiplier);
             }
         }
     }
@@ -268,7 +269,6 @@ public class DuckManager : MonoBehaviour {
         UpdateGameData();
         UpdateBonusData();
         SaveGameData();
-        CreateTextScore(scoreValue);
     }
 
     void UpdateBonusData()
@@ -279,13 +279,13 @@ public class DuckManager : MonoBehaviour {
         {
             PlaySound(gameBonusSound);
             
-            StartCoroutine(CreateBonusDuck(0, 0)); // RESET BONUS DUCKS 2,6
+            StartCoroutine(CreateBonusDuck(2, 6));
             
             SetBonusLevel();
 
             SetMaxBonusText();
             bonusBar.minValue = 0;
-			bonusBar.maxValue = (float) levelBonus;  
+			bonusBar.maxValue = (float) levelBonus; 
         }
 		bonusBar.value = (float) currentBonus;
     }
@@ -396,10 +396,11 @@ public class DuckManager : MonoBehaviour {
     {
 		#if UNITY_5_3_OR_NEWER
 	        
-			//PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
+			PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
 			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "0"));
 			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", "10"));
 			levelBonusMulti = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUSMULTI", "1"));
+			levelBonusSub = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "LEVEL_BONUSSUB", 5);
 			currentBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "CURRENT_BONUS", "0"));
 			clickValue = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "CLICK_VALUE", 1);
 			baseQps = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "BASE_QPS", "0"));
@@ -427,7 +428,7 @@ public class DuckManager : MonoBehaviour {
 		bonusBar.maxValue = (float) levelBonus;
 		SetMaxBonusText ();
 		bonusBar.value = (float) currentBonus;
-
+		
 		GameObject itemManager = GameObject.Find("ItemManager");
 		ItemManager itemManagerScript = itemManager.GetComponent<ItemManager>();
 		itemManagerScript.SetItemData();
@@ -450,6 +451,7 @@ public class DuckManager : MonoBehaviour {
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", quackScore.ToString());
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", levelBonus.ToString());
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "LEVEL_BONUSMULTI", levelBonusMulti.ToString());
+			PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "LEVEL_BONUSSUB", levelBonusSub);
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "CURRENT_BONUS", currentBonus.ToString());
 			PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "CLICK_VALUE", clickValue);
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "BASE_QPS", baseQps.ToString());
