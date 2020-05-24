@@ -177,6 +177,10 @@ public class ItemManager : MonoBehaviour
 
 		if (BuyQualify (items[0].Level, items[0].LevelCount, items[0].Price, duckManagerScript.quackScore)) {
 
+			Vector2 spawnBonusPos = itemLevelTexts[0].GetComponent<RectTransform>().transform.position;
+            GameObject newBonusParticle = (GameObject)(Instantiate(bonusParticles, spawnBonusPos, Quaternion.identity));
+            Destroy(newBonusParticle, 1.0f);
+
 			BuyItem (items[0].Price, items[0].Level);
 			items[0].Level++;
 			items[0].Price = CalculatePowerClickPrice(items[0].Level);
@@ -200,7 +204,6 @@ public class ItemManager : MonoBehaviour
 		if (BuyQualify (items[itemIndex].Level, items[itemIndex].LevelCount, items[itemIndex].Price, duckManagerScript.quackScore)) {
 
 			Vector2 spawnBonusPos = itemLevelTexts[itemIndex].GetComponent<RectTransform>().transform.position;
-			Debug.Log(spawnBonusPos.x.ToString() + " " + spawnBonusPos.y.ToString());
             GameObject newBonusParticle = (GameObject)(Instantiate(bonusParticles, spawnBonusPos, Quaternion.identity));
             Destroy(newBonusParticle, 1.0f);
 
