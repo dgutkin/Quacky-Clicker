@@ -274,7 +274,7 @@ public class DuckManager : MonoBehaviour {
        
         if (currentBonus >= levelBonus)
         {
-            PlaySound(gameBonusSound);
+            GetComponent<AudioSource>().PlayOneShot(gameBonusSound);
             
             StartCoroutine(CreateBonusDuck(2, 6));
             
@@ -388,7 +388,7 @@ public class DuckManager : MonoBehaviour {
 
     void LoadGameData()
     {       
-			//PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
+			PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
 			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "0"));
 			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", "10"));
 			currentBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "CURRENT_BONUS", "0"));
