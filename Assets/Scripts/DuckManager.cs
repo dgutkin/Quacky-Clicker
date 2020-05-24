@@ -68,11 +68,10 @@ public class DuckManager : MonoBehaviour {
 	public Number number = new Number();
 
 	private ulong currentBonus;
-	private ulong levelBonus = 1;
-	private ulong levelBonusMulti = 1;
+	private ulong levelBonus = 10;
+	private int bonusDuckMultiplier = 5;
 
 	private int clickMultiplier = 1;
-    private int levelBonusSub = 5;
 	private ulong levelQps = 0;
 	private ulong levelQpsShown = 0;
 	private int MultiplierTime = 10;
@@ -163,7 +162,7 @@ public class DuckManager : MonoBehaviour {
 				if (rand == 1)
 				{
 					multiplierOn = true;
-				} else if (rand == 2 || rand > 3) {
+				} else if (rand == 2 || rand == 3) {
 					
 					StartCoroutine(CreateBonusDuck(1, 1));
 
@@ -244,13 +243,13 @@ public class DuckManager : MonoBehaviour {
             if (raycastHit2D.collider.tag == "Bonus")
             {
                 PlaySound(gameBonusClickSound[Random.Range(0, gameBonusClickSound.Length)]);
-                UpdateScore(clickValue * clickMultiplier * levelBonusSub);
+                UpdateScore(clickValue * clickMultiplier * bonusDuckMultiplier);
                 Vector3 spawnBonusPos = raycastHit2D.collider.gameObject.transform.position;
                 GameObject newBonusParticle = (GameObject)(Instantiate(bonusParticles, spawnBonusPos, Quaternion.identity));
                 Destroy(newBonusParticle, 1.0f);
                 Destroy(raycastHit2D.collider.gameObject);
                 GameObject newBonusText = (GameObject)(Instantiate(scoreBonus, spawnBonusPos, Quaternion.identity));
-                newBonusText.GetComponent<ScoreBonus>().SetScoreValue(clickValue * clickMultiplier * levelBonusSub);
+                newBonusText.GetComponent<ScoreBonus>().SetScoreValue(clickValue * clickMultiplier * bonusDuckMultiplier);
             }
             else if (raycastHit2D.collider.tag == "Cookie")
             {
@@ -292,16 +291,13 @@ public class DuckManager : MonoBehaviour {
 
     void SetBonusLevel()
     {
-		if ((levelBonus / levelBonusMulti) > 100)
-        {
-            levelBonusMulti *= 10;
-        }
-		levelBonusSub = (int) levelBonusMulti; //bonus duck multiplier
-
-		ulong levelBonusNew = levelBonus + (ulong) ((3 + (6 * 3)) * levelBonusSub * clickValue) + 15 * (baseQps + (ulong) clickValue); //best bonus ducks, add buffer and 5s of bonus clicks
+		//best bonus ducks, add buffer and 30s of bonus clicks
+		ulong levelBonusNew = levelBonus + (ulong) ((3 + (6 * 3)) * bonusDuckMultiplier * clickValue) + 30 * (baseQps + (ulong) clickValue);
 		levelBonusNew = number.RoundLargeNumber(levelBonusNew);
 		if (levelBonusNew == levelBonus)
 			levelBonusNew = number.IncrementLargeNumber(levelBonus, 1);
+		if (levelBonusNew > maxQuacks)
+			levelBonusNew = maxQuacks;
 			
 		levelBonus = levelBonusNew;
     }
@@ -399,8 +395,6 @@ public class DuckManager : MonoBehaviour {
 			PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
 			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "0"));
 			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", "10"));
-			levelBonusMulti = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUSMULTI", "1"));
-			levelBonusSub = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "LEVEL_BONUSSUB", 5);
 			currentBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "CURRENT_BONUS", "0"));
 			clickValue = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "CLICK_VALUE", 1);
 			baseQps = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "BASE_QPS", "0"));
@@ -414,7 +408,6 @@ public class DuckManager : MonoBehaviour {
 			// DELETE ALL GAME DATA !!!!! PlayerPrefs.DeleteAll();
 			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(Application.loadedLevelName + "QUACK_SCORE", "0"));
 			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(Application.loadedLevelName + "LEVEL_BONUS", "10"));
-			levelBonusMulti = System.Convert.ToUInt64(PlayerPrefs.GetString(Application.loadedLevelName + "LEVEL_BONUSMULTI", "1"));
 			currentBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(Application.loadedLevelName + "CURRENT_BONUS", "0"));
 			clickValue = PlayerPrefs.GetInt(Application.loadedLevelName + "CLICK_VALUE", 1);
 			baseQps = System.Convert.ToUInt64(PlayerPrefs.GetString(Application.loadedLevelName + "BASE_QPS", "0"));
@@ -450,8 +443,6 @@ public class DuckManager : MonoBehaviour {
 		#if UNITY_5_3_OR_NEWER    
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", quackScore.ToString());
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", levelBonus.ToString());
-			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "LEVEL_BONUSMULTI", levelBonusMulti.ToString());
-			PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "LEVEL_BONUSSUB", levelBonusSub);
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "CURRENT_BONUS", currentBonus.ToString());
 			PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "CLICK_VALUE", clickValue);
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "BASE_QPS", baseQps.ToString());
@@ -464,7 +455,7 @@ public class DuckManager : MonoBehaviour {
 		#else
 			PlayerPrefs.SetString(Application.loadedLevelName + "QUACK_SCORE", quackScore.ToString());
 			PlayerPrefs.SetString(Application.loadedLevelName + "LEVEL_BONUS", levelBonus.ToString());
-			PlayerPrefs.SetString(Application.loadedLevelName + "LEVEL_BONUSMULTI", levelBonusMulti.ToString());
+			//PlayerPrefs.SetString(Application.loadedLevelName + "LEVEL_BONUSMULTI", levelBonusMulti.ToString());
 			PlayerPrefs.SetString(Application.loadedLevelName + "CURRENT_BONUS", currentBonus.ToString());
 			PlayerPrefs.SetInt(Application.loadedLevelName + "CLICK_VALUE", clickValue);
 			PlayerPrefs.SetString(Application.loadedLevelName + "BASE_QPS", baseQps.ToString());
