@@ -211,8 +211,8 @@ public class ItemManager : MonoBehaviour
 			items[itemIndex].Level++;
 			duckManagerScript.baseQps += (ulong) items[itemIndex].Qps;
 			ulong newPrice = CalculateItemPrice(duckManagerScript.baseQps, duckManagerScript.clickValue, items[itemIndex].Qps);
-			if (newPrice == items[itemIndex].Price)
-				newPrice = number.IncrementLargeNumber(newPrice, 1);
+			if (newPrice <= items[itemIndex].Price)
+				newPrice = number.IncrementLargeNumber(items[itemIndex].Price, 1);
 			items[itemIndex].Price = newPrice;
 
 			itemLevelTexts[itemIndex].text = UpdateItemLevel (items[itemIndex].Level);
