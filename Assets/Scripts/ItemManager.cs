@@ -28,7 +28,11 @@ public class ItemManager : MonoBehaviour
 
 	public SpriteToggle[] backgroundToggles;
 	
+	public GameObject bonusParticles;
+
 	public Number number = new Number();
+
+
 
     #region --------------- ITEM DATA ---------------
 
@@ -194,6 +198,11 @@ public class ItemManager : MonoBehaviour
 		DuckManager duckManagerScript = duckManager.GetComponent<DuckManager>();
 		
 		if (BuyQualify (items[itemIndex].Level, items[itemIndex].LevelCount, items[itemIndex].Price, duckManagerScript.quackScore)) {
+
+			Vector2 spawnBonusPos = itemLevelTexts[itemIndex].GetComponent<RectTransform>().transform.position;
+			Debug.Log(spawnBonusPos.x.ToString() + " " + spawnBonusPos.y.ToString());
+            GameObject newBonusParticle = (GameObject)(Instantiate(bonusParticles, spawnBonusPos, Quaternion.identity));
+            Destroy(newBonusParticle, 1.0f);
 
 			BuyItem (items[itemIndex].Price, items[itemIndex].Level);
 			items[itemIndex].Level++;
