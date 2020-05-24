@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
-
-#if UNITY_5_3_OR_NEWER
 using UnityEngine.SceneManagement;
-#endif
+
 
 public class DuckManager : MonoBehaviour {
 
@@ -91,7 +89,7 @@ public class DuckManager : MonoBehaviour {
     internal Vector3 aimMousePosition;
     internal Vector3 aimTouchPosition;
 
-    string gameID = "3608416"; // different for the android version
+    string gameID = "3608416"; //iOS
 
 	#region --------------- GAME MECHANICS ---------------
 
@@ -389,9 +387,7 @@ public class DuckManager : MonoBehaviour {
 	#region --------------- GAME DATA ---------------
 
     void LoadGameData()
-    {
-		#if UNITY_5_3_OR_NEWER
-	        
+    {       
 			PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
 			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "0"));
 			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", "10"));
@@ -403,16 +399,6 @@ public class DuckManager : MonoBehaviour {
 			GameObject itemManager = GameObject.Find("ItemManager");
 			ItemManager itemManagerScript = itemManager.GetComponent<ItemManager>();
 			itemManagerScript.LoadItemData();
-	       
-		#else
-			// DELETE ALL GAME DATA !!!!! PlayerPrefs.DeleteAll();
-			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(Application.loadedLevelName + "QUACK_SCORE", "0"));
-			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(Application.loadedLevelName + "LEVEL_BONUS", "10"));
-			currentBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(Application.loadedLevelName + "CURRENT_BONUS", "0"));
-			clickValue = PlayerPrefs.GetInt(Application.loadedLevelName + "CLICK_VALUE", 1);
-			baseQps = System.Convert.ToUInt64(PlayerPrefs.GetString(Application.loadedLevelName + "BASE_QPS", "0"));
-	
-		#endif
     }
 
     void SetGameData()
@@ -439,8 +425,7 @@ public class DuckManager : MonoBehaviour {
     }
 
     public void SaveGameData()
-    {
-		#if UNITY_5_3_OR_NEWER    
+    {  
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", quackScore.ToString());
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", levelBonus.ToString());
 			PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "CURRENT_BONUS", currentBonus.ToString());
@@ -451,16 +436,6 @@ public class DuckManager : MonoBehaviour {
 			GameObject itemManager = GameObject.Find("ItemManager");
 			ItemManager itemManagerScript = itemManager.GetComponent<ItemManager>();
 			itemManagerScript.SaveItemData();
-
-		#else
-			PlayerPrefs.SetString(Application.loadedLevelName + "QUACK_SCORE", quackScore.ToString());
-			PlayerPrefs.SetString(Application.loadedLevelName + "LEVEL_BONUS", levelBonus.ToString());
-			//PlayerPrefs.SetString(Application.loadedLevelName + "LEVEL_BONUSMULTI", levelBonusMulti.ToString());
-			PlayerPrefs.SetString(Application.loadedLevelName + "CURRENT_BONUS", currentBonus.ToString());
-			PlayerPrefs.SetInt(Application.loadedLevelName + "CLICK_VALUE", clickValue);
-			PlayerPrefs.SetString(Application.loadedLevelName + "BASE_QPS", baseQps.ToString());
-			
-		#endif
     }
 
 	#endregion

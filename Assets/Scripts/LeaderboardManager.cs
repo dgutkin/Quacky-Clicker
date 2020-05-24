@@ -13,25 +13,23 @@ public class LeaderboardManager : MonoBehaviour
     {
         if (!Social.localUser.authenticated)
             Social.localUser.Authenticate (success => {
-                //do something on success if you like
+                //do something on success
             });
 
 		highQuacksLeaderboard = Social.CreateLeaderboard();
         highQuacksLeaderboard.id = "HighQuacks";
         highQuacksLeaderboard.LoadScores(result =>
         {
-            Debug.Log("Received " + highQuacksLeaderboard.scores.Length + " scores");
-            foreach (IScore score in highQuacksLeaderboard.scores)
-                Debug.Log(score);
+            // Debug.Log("Received " + highQuacksLeaderboard.scores.Length + " scores");
+            // foreach (IScore score in highQuacksLeaderboard.scores)
+            //     Debug.Log(score);
         });
 
         bestTimesLeaderboard = Social.CreateLeaderboard();
         bestTimesLeaderboard.id = "BestTimes";
         bestTimesLeaderboard.LoadScores(result =>
         {
-            Debug.Log("Received " + bestTimesLeaderboard.scores.Length + " scores");
-            foreach (IScore score in bestTimesLeaderboard.scores)
-                Debug.Log(score);
+            // log scores
         });
     }
 
@@ -47,6 +45,7 @@ public class LeaderboardManager : MonoBehaviour
         duckManagerScript.ButtonSound();
 
         if (Social.localUser.authenticated) {
+            
             Social.ShowLeaderboardUI ();
             
 			ReportScore((long) duckManagerScript.quackScore, highQuacksLeaderboard.id);
@@ -56,9 +55,9 @@ public class LeaderboardManager : MonoBehaviour
 
     public void ReportScore(long score, string leaderboardID)
     {
-        Debug.Log("Reporting score " + score + " on leaderboard " + leaderboardID);
+        //Debug.Log("Reporting score " + score + " on leaderboard " + leaderboardID);
         Social.ReportScore(score, leaderboardID, success => {
-            Debug.Log(success ? "Reported score successfully" : "Failed to report score");
+            //Debug.Log(success ? "Reported score successfully" : "Failed to report score");
         });
     }
 

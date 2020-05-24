@@ -19,16 +19,5 @@ public class Item {
 		Name = itemName;
 
 	}
-
-	// public int[] GenerateItemPrices(int powerBase, int scalingFactor, int levelCount) {
-
-	// 	int[] prices = new int[levelCount];
-
-	// 	for (int i = 0; i < levelCount; i++) {
-	// 		prices [i] = (int) Mathf.Pow(powerBase, (1 + i/scalingFactor));
-	// 	}
-
-	// 	return prices;
-	// }
 	
 }
