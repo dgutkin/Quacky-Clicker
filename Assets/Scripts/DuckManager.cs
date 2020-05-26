@@ -388,7 +388,7 @@ public class DuckManager : MonoBehaviour {
 
     void LoadGameData()
     {       
-			PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
+			//PlayerPrefs.DeleteAll(); // DELETE ALL GAME DATA !!!!!
 			quackScore = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "QUACK_SCORE", "0"));
 			levelBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "LEVEL_BONUS", "10"));
 			currentBonus = System.Convert.ToUInt64(PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "CURRENT_BONUS", "0"));
@@ -480,7 +480,7 @@ public class DuckManager : MonoBehaviour {
 		GameObject itemManager = GameObject.Find("ItemManager");
 		ItemManager itemManagerScript = itemManager.GetComponent<ItemManager>();
 		itemManagerScript.UpdateQuacksText(quackScore);
-		if (Random.Range(1,4) == 1)
+		if (Random.Range(1,5) == 1)
 			Advertisement.Show();
 		ShowItemsMenu ();
 	}
