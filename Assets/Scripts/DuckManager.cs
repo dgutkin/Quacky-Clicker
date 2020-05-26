@@ -83,6 +83,8 @@ public class DuckManager : MonoBehaviour {
      
     private Animator animator;
 
+    private int itemAddCounter;
+
     internal bool isGameOver = false;
     internal bool isGamePaused = false;
 
@@ -480,8 +482,12 @@ public class DuckManager : MonoBehaviour {
 		GameObject itemManager = GameObject.Find("ItemManager");
 		ItemManager itemManagerScript = itemManager.GetComponent<ItemManager>();
 		itemManagerScript.UpdateQuacksText(quackScore);
-		if (Random.Range(1,5) == 1)
+		if (itemAddCounter == 4) {
 			Advertisement.Show();
+			itemAddCounter = 0;
+		} else {
+			itemAddCounter++;
+		}
 		ShowItemsMenu ();
 	}
 
