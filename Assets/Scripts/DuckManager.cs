@@ -274,7 +274,7 @@ public class DuckManager : MonoBehaviour {
     {
 		currentBonus = quackScore;
        
-        if (currentBonus >= levelBonus)
+        if (currentBonus >= levelBonus && currentBonus < maxQuacks)
         {
             GetComponent<AudioSource>().PlayOneShot(gameBonusSound);
             

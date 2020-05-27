@@ -22,7 +22,7 @@ public class ItemManager : MonoBehaviour
 
 	[Header("Sounds")]
 
-	public AudioClip[] gameBonusClickSound;
+	public AudioClip[] gameButtonClickSounds;
 
 	[Header("Background Toggles")]
 
@@ -165,7 +165,7 @@ public class ItemManager : MonoBehaviour
 	{
 		GameObject duckManager = GameObject.Find("DuckManager");
 		DuckManager duckManagerScript = duckManager.GetComponent<DuckManager>();
-		duckManagerScript.PlaySound (gameBonusClickSound [Random.Range (0, gameBonusClickSound.Length)]);
+		duckManagerScript.PlaySound (gameButtonClickSounds[0]);
 		duckManagerScript.quackScore = duckManagerScript.quackScore - itemPrice;
 		UpdateQuacksText(duckManagerScript.quackScore);
 	}
@@ -246,12 +246,16 @@ public class ItemManager : MonoBehaviour
 		
 		if (itemPriceTexts[itemIndex].text == "Maxed" && backgroundToggles[itemIndex - 1].ToggleState == 0) {
 			
+			duckManagerScript.PlaySound (gameButtonClickSounds[1]);
+
 			ResetItemBackgrounds();
 			backgroundToggles[itemIndex - 1].SetToggleValue(1);
 			
 			duckManagerScript.spawnDuckObjectsIndex = itemIndex;
 
 		} else if (itemPriceTexts[itemIndex].text == "Maxed" && backgroundToggles[itemIndex - 1].ToggleState == 1) {
+
+			duckManagerScript.PlaySound (gameButtonClickSounds[1]);
 
 			backgroundToggles[itemIndex - 1].SetToggleValue(0);
 
