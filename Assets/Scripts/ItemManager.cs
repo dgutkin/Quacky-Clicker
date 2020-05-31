@@ -123,7 +123,7 @@ public class ItemManager : MonoBehaviour
 
 	public ulong CalculateItemPrice(ulong baseQps, int clickValue, int itemQps)
 	{
-		ulong itemPrice =  (baseQps + (ulong) clickValue  + (ulong) itemQps) * 60;
+		ulong itemPrice =  (ulong) ((float) ((baseQps + (ulong) clickValue  + (ulong) itemQps) * 60) / Mathf.Max(1.0f, Mathf.Log10(baseQps / (ulong) itemQps)));
 	
 		return number.RoundLargeNumber(itemPrice);
 	}
