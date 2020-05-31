@@ -242,7 +242,6 @@ public class DuckManager : MonoBehaviour {
 
             if (raycastHit2D.collider.tag == "Bonus")
             {
-                //PlaySound(gameBonusClickSound[Random.Range(0, gameBonusClickSound.Length)]);
                 GetComponent<AudioSource>().PlayOneShot(gameBonusClickSound);
                 UpdateScore(clickValue * clickMultiplier * bonusDuckMultiplier);
                 Vector3 spawnBonusPos = raycastHit2D.collider.gameObject.transform.position;
