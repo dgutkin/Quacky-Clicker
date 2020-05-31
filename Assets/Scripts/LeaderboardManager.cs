@@ -46,9 +46,9 @@ public class LeaderboardManager : MonoBehaviour
 
         if (Social.localUser.authenticated) {
             
-            Social.ShowLeaderboardUI ();
-            
 			ReportScore((long) duckManagerScript.quackScore, highQuacksLeaderboard.id);
+
+			Social.ShowLeaderboardUI ();
 
         }
     }
