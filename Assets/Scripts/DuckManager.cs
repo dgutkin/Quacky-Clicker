@@ -142,7 +142,7 @@ public class DuckManager : MonoBehaviour {
 				clickMultiplier = 3;
 				multiplierText.text = "3x";
 				rotatingBackground.GetComponent<SpriteRenderer> ().color = Color.red;
-				GetComponent<AudioSource>().PlayOneShot(powerUpSound);
+				SoundManager.instance.PlaySoundPreserve(powerUpSound);
 
 			} else if (multiplierOn && multiplierTimer <= MultiplierTime) {
 				
@@ -242,7 +242,7 @@ public class DuckManager : MonoBehaviour {
 
             if (raycastHit2D.collider.tag == "Bonus")
             {
-                GetComponent<AudioSource>().PlayOneShot(gameBonusClickSound);
+                SoundManager.instance.PlaySoundPreserve(gameBonusClickSound);
                 UpdateScore(clickValue * clickMultiplier * bonusDuckMultiplier);
                 Vector3 spawnBonusPos = raycastHit2D.collider.gameObject.transform.position;
                 GameObject newBonusParticle = (GameObject)(Instantiate(bonusParticles, spawnBonusPos, Quaternion.identity));
@@ -276,7 +276,7 @@ public class DuckManager : MonoBehaviour {
        
         if (currentBonus >= levelBonus && currentBonus < maxQuacks)
         {
-            GetComponent<AudioSource>().PlayOneShot(gameBonusSound);
+            SoundManager.instance.PlaySoundPreserve(gameBonusSound);
             
             StartCoroutine(CreateBonusDuck(2, 6));
             

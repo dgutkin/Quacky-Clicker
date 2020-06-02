@@ -46,11 +46,10 @@ public class SoundManager : MonoBehaviour {
         efxSource.Play();
     }
 
-    public void PlaySound2(AudioClip clip)
+    public void PlaySoundPreserve(AudioClip clip)
     {
-        efxSource.clip = clip;
-        efxSource.pitch = Random.Range(0.9f, 1.1f);
-        efxSource.Play();
+    	efxSource.clip = clip;
+    	efxSource.PlayOneShot(clip);
     }
 
     public void ToggleSoundOnOff()
