@@ -482,6 +482,11 @@ public class DuckManager : MonoBehaviour {
 		GameObject itemManager = GameObject.Find("ItemManager");
 		ItemManager itemManagerScript = itemManager.GetComponent<ItemManager>();
 		itemManagerScript.UpdateQuacksText(quackScore);
+
+		GameObject leaderboardManager = GameObject.Find("LeaderboardManager");
+		LeaderboardManager leaderboardManagerScript = leaderboardManager.GetComponent<LeaderboardManager>();
+		leaderboardManagerScript.ReportScore((long) quackScore, "HighQuacks");
+
 		if (itemAddCounter == 4) {
 			Advertisement.Show();
 			itemAddCounter = 0;
