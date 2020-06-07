@@ -527,6 +527,7 @@ public class DuckManager : MonoBehaviour {
 
 		ButtonSound ();
 		PlayerPrefs.DeleteAll ();
+		spawnDuckObjectsIndex = 0;
 		LoadGameData ();
 		SetGameData ();
 		UpdateGameData ();
