@@ -526,6 +526,14 @@ public class DuckManager : MonoBehaviour {
 	{
 
 		ButtonSound ();
+
+		if (quackScore < maxQuacks)
+		{
+			GameObject leaderboardManager = GameObject.Find("LeaderboardManager");
+			LeaderboardManager leaderboardManagerScript = leaderboardManager.GetComponent<LeaderboardManager>();
+			leaderboardManagerScript.ReportScore((long) quackScore, "HighQuacks");
+		}
+
 		PlayerPrefs.DeleteAll ();
 		spawnDuckObjectsIndex = 0;
 		LoadGameData ();
